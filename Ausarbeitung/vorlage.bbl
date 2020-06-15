@@ -1,0 +1,28 @@
+\begin{thebibliography}{DCLTQ15}
+
+\bibitem[DCLTQ15]{varp}
+{\sc Di~Cola, Simone}, {\sc Kung-Kiu Lau}, {\sc Cuong Tran} \btxandlong{}\ {\sc
+  Chen Qian}: {\em Defining Logical Architectures with Variation Points}.
+\newblock 10 2015.
+
+\bibitem[Mar09]{CC:09}
+{\sc Martin, Robert~C.}: {\em {Clean Code: a handbook of agile software
+  craftsmanship}}.
+\newblock Prentice Hall Pearson Education, 2009.
+
+\bibitem[Mar18]{CA:18}
+{\sc Martin, Robert~C.}: {\em {Clean Architecture: Das Praxis-Handbuch für
+  professionelles Softwaredesign, 1. Auflage}}.
+\newblock mitp Verlag, 2018.
+
+\bibitem[MEM04]{sepoc}
+{\sc Mili, Hafedh}, {\sc Amel Elkharraz} \btxandlong{}\ {\sc Hamid Mcheick}:
+  {\em Understanding separation of concerns}.
+\newblock 01 2004.
+
+\bibitem[NR12]{SSA:12}
+{\sc Nick~Rozanski, Eoin~Woods}: {\em {Software Systems Architecture, Second
+  Edition}}.
+\newblock Addison-Wesley, 2012.
+
+\end{thebibliography}

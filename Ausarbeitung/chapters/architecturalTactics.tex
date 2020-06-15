@@ -1,0 +1,118 @@
+\chapter{Architectural Tactics}
+
+
+
+\section{Architektur-Ebene: Die SOLID-Prinzipien}
+Nicht unbedingt OOP. Ziel: SWA, die Modifikationen unterstützt. Prinzipien nicht neu, Anordnung zur Abkürzung durch Robert C. Martin.
+\subsection{Das Single Responsibility Princip (SRP)}
+\glqq Ein Modul sollte für einen, unr nur einen, Akteur verantwortlich sein. \grqq (\cite{CA:18}, S.86)
+\subsection{Das Open-Closed Prinzip (OCP)}
+Bertrand Meyer \\
+Veränderungen des Verhaltens können durch Codeergänzungen realisiert werden, keine Code-Modifikationen
+\subsection{Das Liskov'sche Substitutionsprinzip (LSP)}
+Barbara Liskov 1988 \\
+Elemente sind austauschbar
+\subsection{Das Interface-Segregation Prinzip (ISP)}
+Keine Abhängigkeiten von nicht genutzen Modulen
+\subsection{Das Dependency-Inversion Prinzip (DIP)}
+Code der übergeordnete Richtlinien implementiert sollte nicht von code abhängen, der untergeordnete Deatils implementiert.
+
+\section{Komponenten-Ebene: Prinzipien der Komponentenkohäsion}
+\subsection{Das Reuse-Release-Equivalence-Prinzip (REP)}
+\subsection{Das Common-Closure-Prinzip (CCP)}
+\subsection{Das Common-Reuse Prinzip (CRP)}
+
+
+\section{Komponenten-Ebene: Prinzipien der Komponentenkopplung}
+\subsection{Das Acyclic-Dependencies-Prinzip (ADP)}
+\subsection{Das Stable-Dependencies-Prinzip (SDP)}
+\subsection{Das Stable-Abstractiond-Prinzip (SAP)}
+
+
+
+\section{Weitere Design-Prinzipien auf Komponentenebene}
+\subsection{Encapsulation  (Kapselung)}
+Bei objektorientierter Programmierung Attribute von Klassen sowie Utility Functions private machen (\cite{CC:09}, S.136). So kann nicht von außen auf klasseninterne Implementierungsdetails zugegriffen werden. Wenn solche internen Details geändert werden, hat dies bei umgesetzter Kapselung keine Auswirkung auf andere Klassen.  \\
+\subsection{Separation of Concerns (Trennung der Verantwortlichkeiten)}
+Jedes Systemelement hat eine klare Verantwortlichkeit. Änderungen an einer Systemoperation wirken sich somit nur auf dieses Systemelement aus.  Sind hingegen viele Elemente für eine Operation verantwortlich, werden Änderungen an der Operation weite Teile des Systems betreffen.\cite{SSA:12} \\
+\cite{sepoc}
+\subsection{Functional Cohesion (Funktionale Kohäsion)}
+Eine hohe Kohäsion bedeutet, dass die Methoden und Variablen einer Klasse voneinander abhängen und logisch zusammengehören. \cite{CC:09}, S.140. Demnach spricht eine hohe Kohäsion dafür, dass das System logisch sinnvoll in Einheiten unterteilt ist.\\
+Funktionale Kohäsion liegt dann vor, wenn die Teile eines Moduls alle zur Lösung einer einzelnen, wohldefinierten Aufgabe beisteuern. \\
+Dies führt zu vielen kleinen Klassen.
+\subsection{Single Point of Definition}
+Datentypen, Werte, Algorithmen, Konfigurationen Schemata etc. werden nur einmal definiert und implementiert (\cite{SSA:12}, S.551). D.h. wenn sie geändert werden müssen, werden sie nur einmal geändert.
+
+
+
+
+
+\section{Design-Patterns}
+Erlauben es, die Auswirkungen von Änderungen lokal zu begrenzen.
+
+\subsection{Creational Patterns}
+\subsubsection{Abstract Factory (Abstrakte Fabrik)}
+\cite{CA:18}, S.109
+Abstract Factory is a creational design pattern that lets you produce families of related objects without specifying their concrete classes.\\
+Use the Abstract Factory when your code needs to work with various families of related products, but you don?t want it to depend on the concrete classes of those products?they might be unknown beforehand or you simply want to allow for future extensibility. \\
+from https://refactoring.guru/design-patterns/abstract-factory
+
+
+\subsection{Structural Patterns}
+\subsubsection{Facade (Fassade)}
+\cite{CA:18}, S.89
+Facade is a structural design pattern that provides a simplified interface to a library, a framework, or any other complex set of classes.
+https://refactoring.guru/design-patterns/facade \\
+Reduziert Abhängigkeiten von Library, falls Library sich ändert
+
+
+\subsubsection{Adapter}
+Adapter is a structural design pattern that allows objects with incompatible interfaces to collaborate. \\
+Erlaubt es Extension Points zu verwenden
+\subsection{Behavioural Patterns}
+\subsubsection{Mediator}
+\subsubsection{Iterator}
+
+\subsection{Weitere Patterns}
+\subsubsection{Dependency Injection}
+\cite{CC:09}, S. 157 \\
+\textit{Wir fassen nochmal zusammen: DI bedeutet eigentlich nichts anderes, als Abhängigkeiten zu konkreten Implementierungen aufzulösen indem man z.B. mit Interfaces arbeitet. Das sorgt dafür, dass die aufrufende Komponente oder Klasse die Abhängigkeiten an die aufgerufene Komponente oder Klasse zur Laufzeit übergibt.Bleibt noch die Frage, wer das eigentlich braucht. Das einfachste Beispiel ist der Fall von Applikationen, die auf unterschiedlichen Plattformen laufen sollen, die für bestimmte Systemaufrufe unterschiedliche APIs anbieten. Wer hier mit DI arbeitet, der kann plattformspezifisches Verhalten wegabstrahieren und so sehr viel gemeinsamen Quellcode nutzen. Plattformspezifika werden dann zur Laufzeit via DI eingefügt.}
+https://www.microsoft.com/de-de/techwiese/know-how/was-ist-eigentlich-dependency-injection.aspx
+\subsubsection{Extension Interface}}
+
+
+
+\section{Metamodel-basierte Architekturstile}
+
+
+\section{Variation Points}
+Lokale Design-Lösungen, um bestimmte Änderungen an bestimmten Stellen im System zu unterstützen, wobei der Begriff ursprünglich aus der Produktlinien-Architektur stammt (\cite{SSA:12}, S.554). \\
+Hier auch Kosten-Nutzen abwägen, ob die Variation Points wirklich gebraucht werden.
+\subsection{Elemente austauschbar machen}
+Implementierung und Interface getrennt halten, s.d. die Implementierung jederzeit ausgetauscht werden kann (Abhängigkeit nur vom Interface)(\cite{SSA:12}, S.554).
+\subsection{Konfigurationen verwenden}
+Systemverhalten durch Parametrisierung steuern (\cite{SSA:12}, S.554). Dann können einfach die Parameter ausgetauscht werden.
+\subsection{Self-Describing Data und Generic Processing}
+Anstatt hard-coden mitgelieferte Informationen über die Daten nutzen, um diese generisch zu verarbeiten (\cite{SSA:12}, S.554).
+\subsection{Physische und Logische Verarbeitung getrennt halten}
+Einfacher wenn physiches Format sich ändert, z.B. CSV zu XML (\cite{SSA:12}, S.554)
+\subsection{Prozesse in Schritte unterteilen}
+Dann lassen sich die einzelnen Schritte leichter abändern (\cite{SSA:12}, S.554)
+\\
+\cite{varp}
+
+
+
+\section{Extension Points}
+In Standard-Technologien bereits eingebaute Möglichkeiten, um Änderungen zu unterstützen (\cite{SSA:12}, S.554). Beispielsweise Custom Adapter schreiben
+\section{Sicherheit bei Änderungen}
+\subsection{Konfigurationsmanagement}
+\subsection{Automatisierte Build-Prozesse}
+\subsection{Dependency analysis}
+\subsection{Automatisierte Release Prozesse}
+\subsection{Zurücksetzen}
+\subsection{Environment Konfigurationsmanagement}
+\subsection{Automatisiertes Testen}
+\subsection{Continuos Integration}
+\subsection{Entwicklungsumgebung sichern}
+
