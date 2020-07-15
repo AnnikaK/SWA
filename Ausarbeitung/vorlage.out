@@ -1,45 +1,24 @@
-\BOOKMARK [0][-]{chapter.1}{Architectural Tactics}{}% 1
-\BOOKMARK [1][-]{section.1.1}{Architektur-Ebene: Die SOLID-Prinzipien}{chapter.1}% 2
-\BOOKMARK [2][-]{subsection.1.1.1}{Das Single Responsibility Princip \(SRP\)}{section.1.1}% 3
-\BOOKMARK [2][-]{subsection.1.1.2}{Das Open-Closed Prinzip \(OCP\)}{section.1.1}% 4
-\BOOKMARK [2][-]{subsection.1.1.3}{Das Liskov'sche Substitutionsprinzip \(LSP\)}{section.1.1}% 5
-\BOOKMARK [2][-]{subsection.1.1.4}{Das Interface-Segregation Prinzip \(ISP\)}{section.1.1}% 6
-\BOOKMARK [2][-]{subsection.1.1.5}{Das Dependency-Inversion Prinzip \(DIP\)}{section.1.1}% 7
-\BOOKMARK [1][-]{section.1.2}{Komponenten-Ebene: Prinzipien der Komponentenkoh\344sion}{chapter.1}% 8
-\BOOKMARK [2][-]{subsection.1.2.1}{Das Reuse-Release-Equivalence-Prinzip \(REP\)}{section.1.2}% 9
-\BOOKMARK [2][-]{subsection.1.2.2}{Das Common-Closure-Prinzip \(CCP\)}{section.1.2}% 10
-\BOOKMARK [2][-]{subsection.1.2.3}{Das Common-Reuse Prinzip \(CRP\)}{section.1.2}% 11
-\BOOKMARK [1][-]{section.1.3}{Komponenten-Ebene: Prinzipien der Komponentenkopplung}{chapter.1}% 12
-\BOOKMARK [2][-]{subsection.1.3.1}{Das Acyclic-Dependencies-Prinzip \(ADP\)}{section.1.3}% 13
-\BOOKMARK [2][-]{subsection.1.3.2}{Das Stable-Dependencies-Prinzip \(SDP\)}{section.1.3}% 14
-\BOOKMARK [2][-]{subsection.1.3.3}{Das Stable-Abstractiond-Prinzip \(SAP\)}{section.1.3}% 15
-\BOOKMARK [1][-]{section.1.4}{Weitere Design-Prinzipien auf Komponentenebene}{chapter.1}% 16
-\BOOKMARK [2][-]{subsection.1.4.1}{Encapsulation \(Kapselung\)}{section.1.4}% 17
-\BOOKMARK [2][-]{subsection.1.4.2}{Separation of Concerns \(Trennung der Verantwortlichkeiten\)}{section.1.4}% 18
-\BOOKMARK [2][-]{subsection.1.4.3}{Functional Cohesion \(Funktionale Koh\344sion\)}{section.1.4}% 19
-\BOOKMARK [2][-]{subsection.1.4.4}{Single Point of Definition}{section.1.4}% 20
-\BOOKMARK [1][-]{section.1.5}{Design-Patterns}{chapter.1}% 21
-\BOOKMARK [2][-]{subsection.1.5.1}{Creational Patterns}{section.1.5}% 22
-\BOOKMARK [2][-]{subsection.1.5.2}{Structural Patterns}{section.1.5}% 23
-\BOOKMARK [2][-]{subsection.1.5.3}{Behavioural Patterns}{section.1.5}% 24
-\BOOKMARK [2][-]{subsection.1.5.4}{Weitere Patterns}{section.1.5}% 25
-\BOOKMARK [1][-]{section.1.6}{Metamodel-basierte Architekturstile}{chapter.1}% 26
-\BOOKMARK [1][-]{section.1.7}{Variation Points}{chapter.1}% 27
-\BOOKMARK [2][-]{subsection.1.7.1}{Elemente austauschbar machen}{section.1.7}% 28
-\BOOKMARK [2][-]{subsection.1.7.2}{Konfigurationen verwenden}{section.1.7}% 29
-\BOOKMARK [2][-]{subsection.1.7.3}{Self-Describing Data und Generic Processing}{section.1.7}% 30
-\BOOKMARK [2][-]{subsection.1.7.4}{Physische und Logische Verarbeitung getrennt halten}{section.1.7}% 31
-\BOOKMARK [2][-]{subsection.1.7.5}{Prozesse in Schritte unterteilen}{section.1.7}% 32
-\BOOKMARK [1][-]{section.1.8}{Extension Points}{chapter.1}% 33
-\BOOKMARK [1][-]{section.1.9}{Sicherheit bei \304nderungen}{chapter.1}% 34
-\BOOKMARK [2][-]{subsection.1.9.1}{Konfigurationsmanagement}{section.1.9}% 35
-\BOOKMARK [2][-]{subsection.1.9.2}{Automatisierte Build-Prozesse}{section.1.9}% 36
-\BOOKMARK [2][-]{subsection.1.9.3}{Dependency analysis}{section.1.9}% 37
-\BOOKMARK [2][-]{subsection.1.9.4}{Automatisierte Release Prozesse}{section.1.9}% 38
-\BOOKMARK [2][-]{subsection.1.9.5}{Zur\374cksetzen}{section.1.9}% 39
-\BOOKMARK [2][-]{subsection.1.9.6}{Environment Konfigurationsmanagement}{section.1.9}% 40
-\BOOKMARK [2][-]{subsection.1.9.7}{Automatisiertes Testen}{section.1.9}% 41
-\BOOKMARK [2][-]{subsection.1.9.8}{Continuos Integration}{section.1.9}% 42
-\BOOKMARK [2][-]{subsection.1.9.9}{Entwicklungsumgebung sichern}{section.1.9}% 43
-\BOOKMARK [0][-]{chapter*.12}{Literaturverzeichnis}{}% 44
-\BOOKMARK [0][-]{appendix.A}{Glossar}{}% 45
+\BOOKMARK [0][-]{chapter.1}{Architekturtaktiken}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Begriffe}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Designprinzipien}{chapter.1}% 3
+\BOOKMARK [2][-]{subsection.1.2.1}{Die SOLID-Prinzipien}{section.1.2}% 4
+\BOOKMARK [2][-]{subsection.1.2.2}{Weitere Designprinzipien}{section.1.2}% 5
+\BOOKMARK [2][-]{subsection.1.2.3}{Komponentenprinzipien}{section.1.2}% 6
+\BOOKMARK [1][-]{section.1.3}{Design-Patterns}{chapter.1}% 7
+\BOOKMARK [2][-]{subsection.1.3.1}{Abstract Factory}{section.1.3}% 8
+\BOOKMARK [2][-]{subsection.1.3.2}{Dependency Injection}{section.1.3}% 9
+\BOOKMARK [2][-]{subsection.1.3.3}{Weitere Patterns}{section.1.3}% 10
+\BOOKMARK [1][-]{section.1.4}{Erweiterbare Interfaces}{chapter.1}% 11
+\BOOKMARK [1][-]{section.1.5}{Metamodell-basierte Architekturstile}{chapter.1}% 12
+\BOOKMARK [1][-]{section.1.6}{Variation Points}{chapter.1}% 13
+\BOOKMARK [2][-]{subsection.1.6.1}{Vorgehensweisen}{section.1.6}% 14
+\BOOKMARK [2][-]{subsection.1.6.2}{Beispiele}{section.1.6}% 15
+\BOOKMARK [1][-]{section.1.7}{Extension Points}{chapter.1}% 16
+\BOOKMARK [1][-]{section.1.8}{Reliable Change}{chapter.1}% 17
+\BOOKMARK [2][-]{subsection.1.8.1}{Konfigurationsmanagement}{section.1.8}% 18
+\BOOKMARK [2][-]{subsection.1.8.2}{Automatisieren}{section.1.8}% 19
+\BOOKMARK [2][-]{subsection.1.8.3}{Dependency Analysis}{section.1.8}% 20
+\BOOKMARK [2][-]{subsection.1.8.4}{Continuos Integration}{section.1.8}% 21
+\BOOKMARK [2][-]{subsection.1.8.5}{\304nderungen zur\374cksetzen}{section.1.8}% 22
+\BOOKMARK [0][-]{chapter*.25}{Literaturverzeichnis}{}% 23
+\BOOKMARK [0][-]{appendix.A}{Glossar}{}% 24
