@@ -1,117 +1,294 @@
-\chapter{Architectural Tactics}
+
+\chapter{Architekturtaktiken}
+In diesem Kapitel werden Architekturtaktiken vorgestellt, die bei Anwendung der Evolutionsperspektive im vierten Schritt eingesetzt werden können, um die bestehende Architektur zu überarbeiten. Nach \cite{SSA:12} ist eine Architekturtaktik definiert als \glqq eine etablierte und bewährte Vorgehensweise, die verwendet werden kann, um eine bestimmte Qualitätseigenschaft zu erreichen.\grqq (\cite{SSA:12}, S.48, Z.11-12, eigene Übersetzung). Die Qualitätseigenschaften sind in diesem Fall alle für die Evolutionsperspektive wichtigen Concerns.
+
+
+\section{Begriffe}
+In diesem Abschnitt werden zunächst die zum Verständnis dieses Kapitel notwendigen Begriffe erläutert.
+
+\paragraph{Modul}
+Ein Modul ist ein zusammenhängender Satz von Funktionen und Datenstrukturen (\cite{CA:18}, S.86). 
+Im Falle der objektorientierten Programmierung ist ein Modul beispielsweise eine Klasse oder ein Interface.
+\paragraph{Komponente}
+Komponenten sind als Deployment-Einheiten zu verstehen, d.h. \glqq sie repräsentieren die kleinsten Entitäten, die als Teil eines Systems deployt werden können\grqq (\cite{CA:18}, S.113, Z.2-3). Es ist bei gutem Komponentendesign möglich, Komponenten unabhängig voneinander zu entwickeln und zu deployen, beispielsweise als Plug-ins im .jar oder .exe Format (\cite{CA:18}, S.113). Diese Unabhängigkeit erleichtert den Umgang mit Änderungen enorm, da Entwickler entscheiden können, wann geänderte Komponenten integriert werden (\cite{CA:18}, S.131).
+
+\paragraph{Abhängigkeit}
+Wenn ein Modul ein anderes Modul verwendet, ist dies eine Quellcode-Abhängigkeit, kurz Abhängigkeit, vom verwendeten Modul. 
+Jede Objekterzeugung stellt eine Abhängigkeit von der konkreten Definition des Objektes dar (\cite{CA:18}, S.109). Die stärkste und strengste Abhängigkeit stellt Vererbung dar (\cite{CA:18}, S.108).
+
+\paragraph{Stabilität}
+Stabilität im Zusammenhang mit Software gibt an, wie viel Aufwand erforderlich ist, ein Modul bzw. eine Komponente zu ändern. Je größer der Aufwand, desto stabiler ist sie. Eine Komponente ist sehr stabil, wenn sie viele eingehende , aber kaum ausgehende Abhängigkeiten aufweist (\cite{CA:18}, S. 138).
+
+\paragraph{Design-Pattern}
+\glqq Ein Design-Pattern dokumentiert eine oft wiederkehrende und etablierte Struktur von miteinander verbundenen Design-Elementen, die ein generelles Design Problem in einem bestimmten Kontext löst\grqq (\cite{SSA:12}, S.165, Z.4-6, eigene Übersetzung). Design-Patterns beziehen sich demnach immer auf ein Problem in einem Kontext.
+\paragraph{Designprinzip}
+\glqq Ein Software-Designprinzip ist eine umfassende und fundamentale Doktrin oder Regel, welche die Entwicklung von qualitativen Software Designs leitet\grqq (\cite{princ}, S.1, Z.64-66, eigene Übersetzung). 
+Designprinzipien sind allgemeiner als Patterns, d.h. sie sind nicht an ein Problem oder einen Kontext gebunden und unabhängig von Implementierungsdetails.
 
 
 
-\section{Architektur-Ebene: Die SOLID-Prinzipien}
-Nicht unbedingt OOP. Ziel: SWA, die Modifikationen unterstützt. Prinzipien nicht neu, Anordnung zur Abkürzung durch Robert C. Martin.
-\subsection{Das Single Responsibility Princip (SRP)}
-\glqq Ein Modul sollte für einen, unr nur einen, Akteur verantwortlich sein. \grqq (\cite{CA:18}, S.86)
-\subsection{Das Open-Closed Prinzip (OCP)}
-Bertrand Meyer \\
-Veränderungen des Verhaltens können durch Codeergänzungen realisiert werden, keine Code-Modifikationen
-\subsection{Das Liskov'sche Substitutionsprinzip (LSP)}
-Barbara Liskov 1988 \\
-Elemente sind austauschbar
-\subsection{Das Interface-Segregation Prinzip (ISP)}
-Keine Abhängigkeiten von nicht genutzen Modulen
-\subsection{Das Dependency-Inversion Prinzip (DIP)}
-Code der übergeordnete Richtlinien implementiert sollte nicht von code abhängen, der untergeordnete Deatils implementiert.
+\section{Designprinzipien}
+Die erste hier vorgestellte Architekturtaktik besteht darin, etablierte Designprinzipien zu verwenden. Sie helfen, Auswirkungen von Änderungen einzuschränken (\cite{SSA:12}, S.553) sowie die Komplexität des Systems zu verringern. Eine verständliche und gut strukturierte Architektur lässt sich einfacher erweitern und verbessern. \\
 
-\section{Komponenten-Ebene: Prinzipien der Komponentenkohäsion}
-\subsection{Das Reuse-Release-Equivalence-Prinzip (REP)}
-\subsection{Das Common-Closure-Prinzip (CCP)}
-\subsection{Das Common-Reuse Prinzip (CRP)}
-
-
-\section{Komponenten-Ebene: Prinzipien der Komponentenkopplung}
-\subsection{Das Acyclic-Dependencies-Prinzip (ADP)}
-\subsection{Das Stable-Dependencies-Prinzip (SDP)}
-\subsection{Das Stable-Abstractiond-Prinzip (SAP)}
+ 
+\subsection{Die SOLID-Prinzipien}
+Bei den SOLID-Prinzipien handelt es sich um Designprinzipien, welche sich auf die Modulebene beziehen. Der Begriff SOLID ist ein Akronym für die einzelnen Prinzipien, wobei der Begriff um 2004 von Robert C. Martin geprägt wurde. Ihm ist die Zusammenstellung der Prinzipien in ihrer heutigen Form zu verdanken. Die Prinzipien selbst reichen jedoch weitaus länger zurück, wennngleich sie sich im Laufe der Jahre immer wieder verändert haben. Die SOLID-Prinzipien gelten nicht nur für objektorientierte Programmierung (\cite{CA:18}, S.82-83). \\
+Ziel der SOLID-Prinzipien ist es, Module so zu gestalten und organisieren, dass diese Änderungen tolerieren und leicht nachvollziehbar sind. Damit wird Änderbarkeit bereits auf Modulebene unterstützt und es wird das Fundament für gut struktuierte Komponenten gelegt. 
 
 
 
-\section{Weitere Design-Prinzipien auf Komponentenebene}
-\subsection{Encapsulation  (Kapselung)}
-Bei objektorientierter Programmierung Attribute von Klassen sowie Utility Functions private machen (\cite{CC:09}, S.136). So kann nicht von außen auf klasseninterne Implementierungsdetails zugegriffen werden. Wenn solche internen Details geändert werden, hat dies bei umgesetzter Kapselung keine Auswirkung auf andere Klassen.  \\
-\subsection{Separation of Concerns (Trennung der Verantwortlichkeiten)}
-Jedes Systemelement hat eine klare Verantwortlichkeit. Änderungen an einer Systemoperation wirken sich somit nur auf dieses Systemelement aus.  Sind hingegen viele Elemente für eine Operation verantwortlich, werden Änderungen an der Operation weite Teile des Systems betreffen.\cite{SSA:12} \\
-\cite{sepoc}
-\subsection{Functional Cohesion (Funktionale Kohäsion)}
-Eine hohe Kohäsion bedeutet, dass die Methoden und Variablen einer Klasse voneinander abhängen und logisch zusammengehören. \cite{CC:09}, S.140. Demnach spricht eine hohe Kohäsion dafür, dass das System logisch sinnvoll in Einheiten unterteilt ist.\\
-Funktionale Kohäsion liegt dann vor, wenn die Teile eines Moduls alle zur Lösung einer einzelnen, wohldefinierten Aufgabe beisteuern. \\
-Dies führt zu vielen kleinen Klassen.
-\subsection{Single Point of Definition}
-Datentypen, Werte, Algorithmen, Konfigurationen Schemata etc. werden nur einmal definiert und implementiert (\cite{SSA:12}, S.551). D.h. wenn sie geändert werden müssen, werden sie nur einmal geändert.
+\subsubsection{Das Single-Responsibility-Princip (SRP)}
+Das Single-Responsibility-Prinzip wird aufgrund des Namens oft missverstanden, mit der Annahme, dass jedes Modul nur eine Aufgabe haben soll. Dies beschreibt jedoch das Separation of Concerns Prinzip. 
+Das Single-Responsibility-Prinzip lautet hingegen wie folgt:
+\glqq Ein Modul sollte für einen, und nur einen, Akteur verantwortlich sein\grqq (\cite{CA:18}, S.86, Z.18). Daraus folgt, dass \glqq Code, von dem verschiedene Akteure abhängig sind, separiert werden muss\grqq (\cite{CA:18}, S.88, Z.19-20). \\
+Akteur ist hierbei ein Sammelbegriff für Gruppen, die gemeinsame Änderungsinteressen haben. Das kann ein User oder Stakeholder sein, aber auch mehrere. Das SRP soll verhindern, dass Änderungen für einen Akteur sich unbeabsichtigt und eventuell sogar unbemerkt auf andere Akteure auswirken (\cite{CA:18}, S.85-88). 
+
+\subsubsection{Das Open-Closed-Prinzip (OCP)}
+\label{ocp}
+Das Open-Closed-Prinzip wurde 1988 von Bertrand Meyer formuliert (\cite{meyer}, S.23) und besagt: \glqq Eine Softwareentität sollte offen für Erweiterungen, aber zugleich auch geschlossen gegenüber Modifikationen sein.\grqq (\cite{CA:18}, S.91, Z.4-5). \\
+Die Möglichkeit, Module erweitern zu können, ohne bestehenden Code verändern zu müssen, stellt den Idealfall dar. Das OCP sollte darum stets ein leitendes Motiv beim Entwurf von Modulen sein.
+\subsubsection{Das Liskov'sche Substitutionsprinzip (LSP)}
+\label{lsp}
+Das Liskov'sche Substitutionsprinzip wurde 1987 von Barbara Liskov formuliert \cite{barbara}.
+Es besagt übersetzt: \glqq Was hier erreicht werden sollte, ist etwas wie die folgende Substitutionseigenschaft: Wenn für jedes Objekt o1 vom Typ S ein Objekt o2 vom Typ T existiert, sodass für alle Programme P, die in T definiert sind, das Verhalten von P unverändert bleibt, wenn o1 für o2 substituiert wird, dann ist S ein Subtyp von T\grqq (\cite{CA:18}, S.97, Z.5-8).\\
+Einfacher ausgedrückt lautet die Aussage: S ist ein Subtyp von T, wenn T durch S ersetzt werden kann und das Programmverhalten weiterhin gleich bleibt.
+Es ist also gefordert, dass Module durch ihre Subtypen wechselseitig ersetzbar sind. Das LSP spielt vor allem bei Vererbung eine wesentliche Rolle. Wenn das LSP eingehalten wird, kann ein Modul der Klasse T von allen Klassen, die von T erben, substituiert werden, was ein hohes Maß an Flexibilität erlaubt. Wenn T ein Interface ist, dann kann T von allen Klassen substituiert werden, welche das Interface implementierten. Umgekehrt wird das LSP verletzt, wenn die Unterklassen keine echten Unterklassen sind und sich das Systemverhalten bei einem Austausch ändert(\cite{CA:18}, S.98-99).
 
 
+\subsubsection{Das Interface-Segregation-Prinzip (ISP)}
+Das Interface-Segregation-Prinzip besagt, dass Abhängigkeiten von nicht genutzten Modulen vermieden werden sollten (\cite{CA:18}, S.84, Z.15-16). \\
+Beispielsweise stellen transitive Abhängigkeiten eine solche Abhängigkeit dar, die es gilt aufzulösen (\cite{CA:18}, S.105). 
+Es kann sie auch auf kleinerer Ebene in Form von ungenutzten Funktionen geben. Wenn eine Klasse viele Funktionen enthält, aber nur wenige davon tatsächlich benötigt werden, macht es Sinn, ein Interface dazwischenzuschalten, welches nur die benötigten Funktionen enthält. Auf diese Weise haben Änderungen an ungenutzten Funktionen keine Auswirkungen mehr. Werden für verschiedene Klassen, die unterschiedliche Funktionen nutzen, jeweils ein solches Interface dazwischengeschaltet, erhält man eine Auftrennung der Funktionen durch Interfaces, was den Namen des Prinzips begründet (\cite{CA:18}, S.103-104).
+%TODO
+%Abbildung?
+
+
+\subsubsection{Das Dependency-Inversion-Prinzip (DIP)}
+\label{dip}
+Das fünfte der SOLID-Prinzipen besagt: \glqq Der Code, der die übergeordneten Richtlinien (engl. Policy) implementiert, sollte nicht von dem Code abhängig sein, der untergeordnete Details implementiert. Vielmehr sollten Details von den Richtlinien abhängig sein.\grqq (\cite{CA:18}, S.84, Z.17-21).  \\
+Abhängigkeiten von Modulen, die sich oft ändern, sind zu vermeiden. In diesem Fall ist es vorzuziehen, eine Abstraktion zwischen den Modulen einzubauen, sodass sowohl die stabilen, übergeordneten als auch die untergeordneten Module beide von der Abstraktion abhängig sind (\cite{CA:18}, S.107-108). Bei der Abstraktion kann es sich beispielsweise um ein Interface oder eine abstrakte Klasse handeln.\\
+Eine alternative Defintion des DIP lautet deshalb: \glqq Unser Entwurf soll sich auf Abstraktionen stützen. Er soll sich nicht auf Spezialisierungen stützen.\grqq (\cite{OOP:09}, Z.12-13). \\
+Durch Quellcode-Abhängigkeiten, die sich aussschließlich auf Abstraktionen beziehen, ist das System sehr flexibel. Die flüchtigen Module, die untergeordnete Details enthalten, können sich beliebig oft ändern, ohne dass die übergeordneten Module davon beeinflusst werden, da die Abstraktion in den meisten Fällen unverändert bleibt.
+Beispielsweise bleibt ein Interface meist unbeeinflusst, wenn sich eine Klasse ändert, die das Interface implementiert.  \\
+Damit das DIP funktioniert, muss allerdings bewusst darauf geachtet werden, dass die abstrakten Schnittstellen so stabil wie möglich gestaltet werden, denn mit flüchtigen Schnittstellen ist nichts gewonnen (\cite{CA:18}, S.108). \\
+Überall Abstraktionen einzubauen ist in der Praxis jedoch nicht realistisch. Nicht alle Abhängigkeiten zu konkreten Modulen lassen sich verhindern. Es ist hier wichtig, abzuwägen, wann Abhängigkeiten akzeptabel sind. Module, die stabil sind, werden eher unwahrscheinlich geändert, hier sind Abhängigkeiten tolerierbar (\cite{CA:18}, S.107-108). Zudem können die Auswirkungen von Abhängigkeiten abgeschwächt werden, indem die konrekten Module gemeinsam in konkreten Komponenten gruppiert werden, sodass die Abhängigkeiten lokal begrenzt und vom restlichen System getrennt sind (\cite{CA:18}, S.110).\\
+Ein Beispiel für das DIP erfolgt an späterer Stelle in diesem Kapitel (siehe Abschnitt \ref{example}).
+
+\subsection{Weitere Designprinzipien}
+Im Folgendenn werden einige weitere Designprinzipien erläutert, die nicht zu den SOLID-Prinzipien gehören, aber ebenso dazu beitragen, die Auswirkungen von Änderungen lokal einzuschränken (\cite{SSA:12}, S.553). 
+\subsubsection{Encapsulation}
+Encapsulation oder Kapselung bechreibt in der objektorientierten Programmierung die Vorgehensweise, klasseninterne Daten und Funktionen mit dem kleinstmöglichen Zugriffsrecht zu versehen und lediglich über eine öffentliche Schnittstelle zur Verfügung zu stellen, damit diese vor Zugriffen von außen geschützt sind. Beispielsweise können Variablen auf \textit{private} gesetzt und lediglich über Getter- und Settermethoden zugänglich gemacht werden (\cite{CC:09}, S.136).\\
+Dies sorgt für eine geringe Kopplung zwischen den Klassen, da auf die Daten nicht uneingeschränkt zugegriffen werden kann. Je weniger andere Klassen mit den Daten oder Funktionen in Berührung kommen, desto weniger wirken sich Änderungen daran auf die anderen Klassen aus \cite{kaps}.
+
+\subsubsection{Separation of Concerns}
+Das Separation of Concerns Prinzip besagt, dass jedes Systemelement eine klare Verantwortlichkeit haben sollte. Ein Element kann beispielsweise eine Funktion, ein Modul oder eine ganze Komponente sein. Separation of Concerns sollte auf allen Ebenen eingehalten werden. Wird das Prinzip befolgt, wirken sich Änderungen an einem Element nur lokal eingeschränkt aus, wird es hingegen missachtet, können bereits bei kleinsten Änderungen weite Teile des Systems mitbetroffen sein (\cite{SSA:12}, S.553).
+
+
+\subsubsection{Funktionale Kohäsion}
+Funktionale Kohäsion gibt an, wie stark die Funktionen eines Moduls oder einer Komponente miteinander in Beziehung stehen und damit logisch zusammengehören. Demnach spricht eine hohe Kohäsion dafür, dass das System sinnvoll in Module bzw. Komponenten unterteilt ist. Bei einer hohen funktionalen Kohäsion wirken Änderungen sich meist nur lokal auf jenen zusammenhängenden Bereich aus (\cite{SSA:12}, S.553).
+Die konsequente Befolgung dieses Prinzips führt zu vielen kleinen Modulen(\cite{CC:09}, S.140). 
+
+\subsubsection{Single Point of Definition}
+Das Single Point of Definition Prinzip besagt, dass Datentypen, Werte, Algorithmen, Konfigurationen Schemata etc. nur einmal definiert und implementiert werden sollen (\cite{SSA:12}, S.553). Es gibt demnach stets genau einen Definitionspunkt. Dies bietet den Vorteil, dass jene Elemente bei einer Anpassung nur einmal geändert werden müssen, nämlich an der Stelle, an der sie definiert sind.
+
+
+
+\subsection{Komponentenprinzipien}
+Im Folgenden werden weitere Designprinzipien vorgestellt, die sich jedoch nicht mehr auf die Modul-, sondern ausschließlich auf die Komponentenebene beziehen.
+
+ 
+ \subsubsection{Das Acyclic-Dependencies-Prinzip (ADP)}
+ Das Acyclic-Dependencies-Prinzip bezieht sich auf die Komponentenkopplung, d.h. die Beziehungen zwischen Komponenten. Das Prinzip besagt, dass im Schema der Komponentenabhängigkeiten keine Zyklen auftreten dürfen (\cite{CA:18}, S.129, Z.8). \\
+ %Wird eine  Komponente A geändert, müssen alle Komponenten, die von A abhängen, an die neue Version von A angepasst werden. Es ist auch klar, zu welchen Komponenten A kompatibel sein muss, nämlich zu allen, von denen A selbst abhängt. \\
+ Die Auswirkungen von Änderungen lassen sich nicht mehr klar abschätzen, sobald ein Abhängigkeitszyklus vorliegt. 
+  Abbildung \ref{fig:adp} zeigt einen solchen Abhängigkeitszyklus in einem für Anwendungen typischen Komponentendiagramm (\cite{CA:18}, S.131). \\
+  Durch die zyklische Abhängigkeit verschmelzen die Komponenten \textit{Entities}, \textit{Authorizer} und \textit{Interactors} praktisch zu einer einzigen Komponente, obwohl sie unabhängig voneinander sein sollen. Wenn \textit{Authorizer} sich ändert, muss nicht nur \textit{Entities} angepasst werden, um kompatibel zu sein, sondern auch \textit{Interactors}, da die Komponente von \textit{Entities} und damit transitiv von \textit{Authorizer} abhängt.
+  Dies gilt analog für \textit{Interactors} und \textit{Entities}. Die durch den Zyklus entstandenen transitiven Abhängikeiten erschweren sowohl das Entwickeln als auch das Testen. Es gibt keine richtige Reihenfolge mehr, in der die Komponenten erstellt oder geändert werden sollten (\cite{CA:18}, S.133-134). Da ein Zyklus keinen Endpunkt hat, kann es in der Theorie eine endlose Folge von notwendigen Anpassungen geben. In der Praxis werden die Anpassungen zwar nicht endlos sein, aber unangenehm und vor allem vermeidbar aufwendig.
+ 
+ \paragraph{Auflösung mittels DIP}
+ \label{example}
+ Der Zyklus kann mittels Anwendung des Dependency-Inversion-Prinzips unterbrochen werden. Es wird ein Interface erzeugt, in dem alle Methoden enthalten sind, die \textit{User} benötigt. Dieses Interface gehört zur Komponente \textit{Entities}. User hängt von dem Interface ab, aber die Abhängigkeit ist innerhalb derselben Komponente und geht nun nicht mehr zu \textit{Authorizer}. \textit{Authorizer} implementiert das Interface und ist nun vom Interface und damit von Entities abhängig. Damit zeigt der Abhängigkeitspfeil in die umgekehrte Richtung und der Zyklus wurde unterbrochen. Abbildung \ref{fig:loes1_adp} verdeutlicht dieses Vorgehen.
+ 
+ 
+ \begin{figure}[htbp] 
+ 	\centering
+ 	\includegraphics[width=1\textwidth]{images/adp.png}
+ 	\caption{Ein Abhängigkeitszyklus(basierend auf \cite{CA:18}, S.134 Abb. 14.2. sowie S.135, Abb.14.3)}
+ 	\label{fig:adp}
+ \end{figure}
+ 
+ 
+ \begin{figure}[htbp] 
+ 	\centering
+ 	\includegraphics[width=1\textwidth]{images/adp_2.png}
+ 	\caption{Auflösung des Abhängigkeitszyklus mittels DIP (basierend auf \cite{CA:18}, S.134 Abb. 14.2. sowie S.135, Abb.14.3)}
+ 	\label{fig:loes1_adp}
+ \end{figure}
+ 
+ 
+ 
+
+%\subsubsection{Das Reuse-Release-Equivalence-Prinzip (REP)}
+%\subsubsection{Das Common-Closure-Prinzip (CCP)}
+%\subsubsection{Das Common-Reuse Prinzip (CRP)}
+
+
+
+
+\subsubsection{Das Stable-Dependencies-Prinzip (SDP)}
+\label{sdp}
+Das Stable-Dependencies-Prinzip bezieht sich auf die Komponentenkopplung  und lautet: \glqq Abhängigkeiten sollten in dieselbe Richtung verlaufen wie sie Stabilität.\grqq (\cite{CA:18}, S.137, Z.16). \\
+Demnach sollen stabile Komponenten nicht von instabilen Komponenten abhängen, die sich mit hoher Wahrscheinlichkeit ändern werden.
+Stabile Komponenten lassen sich nur schwer modifizieren und behindern damit die Änderungen an der instabilen Komponente, da sie nur schwer daran angepasst werden können. Stattdessen sollen die instabilen von den stabilen Komponenten abhängen\cite{CA:18}, S.137).\\
+Die Instabilität einer Komponente $I \in [0,1]$ lässt sich wie in Formel \ref{eq} angegeben bestimmen (\cite{CA:18}, S.139), wobei 0 maximal stabil entspricht und $\#$ ist die Anzahl bezeichnet. Verstöße gegen das SDP lassen sich mit dem DIP (siehe \ref{dip}) lösen (\cite{CA:18}, S.139-142).
+
+
+\begin{equation}
+\label{eq}
+	I=\frac{\#\, ausgehende\, Abh\ddot{a}ngigkeiten}{\#\, eingehende\, Abh\ddot{a}ngigkeiten +  \#\, ausgehende\, Abh\ddot{a}ngigkeiten}
+\end{equation}
+
+
+
+\subsubsection{Das Stable-Abstractions-Prinzip (SAP)}
+Das Stable-Abstractions-Prinzip bezieht sich ebenfalls auf die Komponentenkopplung und lautet:
+\glqq Eine Komponente sollte ebenso abstrakt sein, wie sie stabil ist.\grqq (\cite{CA:18}, S.143, Z.14). \\
+Damit sollen stabile Komponenten aus Schnittstellen sowie abstrakten Klassen und instabile Komponenten aus konkreten Klassen bestehen. Diese Abstraktion erlaubt es, stabile Komponenten trotz ihrer Stabilität erweitern zu können.
+SAP und SDP zusammengenommen ergeben das DIP auf Komponentenebene. Der wesentliche Unterschied ist, dass Komponenten im Gegensatz zu Modulen nicht entweder abstrakt oder konkret sind, sondern sich auch dazwischen befinden können.
+Der Grad der Abstraktion einer Komponente $A \in [0.1]$ lässt sich genau wie Instabilität als Softwaremetrik messen mittels der in \ref{eq2} angegebenen Formel (\cite{CA:18}, S.144), wobei 1 für maximal abstrakt steht.
+\begin{equation}
+\label{eq2}
+A=\frac{\#\, abstrakte\,Klassen\,oder\,Schnittstellen}{\#\, Gesamtzahl\,Klassen}
+\end{equation}
 
 
 
 \section{Design-Patterns}
-Erlauben es, die Auswirkungen von Änderungen lokal zu begrenzen.
-
-\subsection{Creational Patterns}
-\subsubsection{Abstract Factory (Abstrakte Fabrik)}
-\cite{CA:18}, S.109
-Abstract Factory is a creational design pattern that lets you produce families of related objects without specifying their concrete classes.\\
-Use the Abstract Factory when your code needs to work with various families of related products, but you don?t want it to depend on the concrete classes of those products?they might be unknown beforehand or you simply want to allow for future extensibility. \\
-from https://refactoring.guru/design-patterns/abstract-factory
+Diese Architekturtaktik besteht darin, etablierte Design-Patterns zu verwenden, die Änderungen vereinfachen.
+Es exisitiert eine breite Auswahl solcher Patterns. Im Folgenden werden Beispiele aufgeführt.
 
 
-\subsection{Structural Patterns}
-\subsubsection{Facade (Fassade)}
-\cite{CA:18}, S.89
-Facade is a structural design pattern that provides a simplified interface to a library, a framework, or any other complex set of classes.
-https://refactoring.guru/design-patterns/facade \\
-Reduziert Abhängigkeiten von Library, falls Library sich ändert
+\subsection{Abstract Factory}
+Das DIP (siehe Abschnitt \ref{dip} bedingt, dass konkrete, flüchtige Objekte nicht ohne Weiteres erzeugt werden können, denn jede Objekterzeugung stellt eine Abhängigkeit zu einer konkreten Klasse des Objektes dar (\cite{CA:18}, S.109). 
+Abhilfe schafft das Design-Pattern Abstract Factory. Dieses Pattern erlaubt es, Familien verwandter Objekte zu erzeugen, ohne deren konkrete Klassen zu spezifizieren (\cite{pat}, S.90). \\
+In Abbildung \ref{fig:fact} ist das Pattern am Beispiel einer plattformübergreifenden grafischen Anwendung gezeigt. In der Mitte befindet sich das Interface \textit{GUIFactory}, dies ist die Abstract Factory. Hier werden Methoden für die konkreten Factories vorgegeben. \textit{Windows Factory} und \textit{MacFactory} sind die konkreten Factories, sie implementieren die Methoden der Abstract Factory. Das Interface \textit{Checkbox }stellt ein abstraktes Produkt dar, das von den konkreten Produkten \textit{WindowsCheckbox} und \textit{MacCheckbox} implementiert wird, analog verhält es sich mit dem Interface \textit{Button} (\cite{pat}, S.96). \\
+Der erste Vorteil besteht in der Konsistenz der Produkte: Die \textit{WindowsFactory} stellt nur zueinander passende Windows UI-Elemente her, analog bei der \textit{MacFactory}. Das Pattern lässt sich beispielsweise um eine Linux-Factory erweitern, die konsistente Linux UI-Elemente enthält. \\
+Der zweite Vorteil besteht darin, dass die Anwendung lediglich von \textit{GUIFactory} abhängig ist, d.h. von einer Abstraktion, was dem DIP entspricht. \\
+Es stellt sich die Frage, an welcher Stelle eine konkrete Factory-Instanz erzeugt wird, z.B. eine \textit{WindowsFactory}. Dies geschieht  in einer konkreten Klasse innerhalb einer konkreten Komponente, wie z.B. in der \textit{main}-Methode, wobei die erzeugte Instantz in einer globalen Variablen gespeichert wird, auf welche die Anwendung dann global zugreifen kann (\cite{CA:18}, S.110).
 
 
-\subsubsection{Adapter}
-Adapter is a structural design pattern that allows objects with incompatible interfaces to collaborate. \\
-Erlaubt es Extension Points zu verwenden
-\subsection{Behavioural Patterns}
-\subsubsection{Mediator}
-\subsubsection{Iterator}
-
-\subsection{Weitere Patterns}
-\subsubsection{Dependency Injection}
-\cite{CC:09}, S. 157 \\
-\textit{Wir fassen nochmal zusammen: DI bedeutet eigentlich nichts anderes, als Abhängigkeiten zu konkreten Implementierungen aufzulösen indem man z.B. mit Interfaces arbeitet. Das sorgt dafür, dass die aufrufende Komponente oder Klasse die Abhängigkeiten an die aufgerufene Komponente oder Klasse zur Laufzeit übergibt.Bleibt noch die Frage, wer das eigentlich braucht. Das einfachste Beispiel ist der Fall von Applikationen, die auf unterschiedlichen Plattformen laufen sollen, die für bestimmte Systemaufrufe unterschiedliche APIs anbieten. Wer hier mit DI arbeitet, der kann plattformspezifisches Verhalten wegabstrahieren und so sehr viel gemeinsamen Quellcode nutzen. Plattformspezifika werden dann zur Laufzeit via DI eingefügt.}
-https://www.microsoft.com/de-de/techwiese/know-how/was-ist-eigentlich-dependency-injection.aspx
-\subsubsection{Extension Interface}
+ \begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=1\textwidth]{images/abstract_factory.png}
+	\caption{Design Pattern Abstract Factory (Abbildung basierend auf \cite{pat}, S.97)}
+	\label{fig:fact}
+\end{figure}
 
 
-\section{Metamodel-basierte Architekturstile}
+\subsection{Dependency Injection}
+Dieses Design-Pattern hilft, übergeordnete Module vor den Implementierungsdetails von untergeordneten Modulen zu schützen (\cite{SSA:12}, S.555). \\
+Abbildung \ref{fig:dep_inj} zeigt Constructor Dependency Injection an einem konkreten Beispiel. Die Klasse \textit{PaymentTerms} beinhaltet alle Informationen, die zur Berechnung der monatlichen Kosten eines Kredits notwendig sind. Die Klasse \textit{PaymentCalculator} enthält die Methode \textit{getMonthlyPayment()}, d.h. hier wird die konkrete Berechnung durchgeführt. Das Problem besteht darin, dass \textit{PaymentTerms} diese Methode aufrufen muss und ohne Dependency Injection direkt von \textit{PaymentCalculator} abhängig wäre. Dies wäre bedenklich: Es könnnten neue Arten von \textit{Calculator}-Klassen hinzukommen, welche die Berechnung anders durchführen, oder vielleicht gibt es auch bereits mehrere solcher \textit{Calculator}-Klassen. Dann sollte es nicht in der Klasse\textit{ PaymentTerms} entschieden werden, welche Berechnung verwendet wird, sondern in einem übergeordneten Modul. \\
+Constructor Dependency Injection löst dies folgendermaßen: Es wird ein Interface erzeugt, hier \textit{IPaymentCalculator} genannt, das die benötigte Methode enthält und das von \textit{PaymentCalculator }und allen möglichen weiteren \textit{Calculator}-Klassen implementiert wird. Der Klasse \textit{PaymentTerms} wird im Konstruktor ein\textit{ IPaymentCalculator}-Objekt übergeben. Damit besteht nur noch eine Abhängigkeit zu einer Abstraktion, was dem DIP entspricht (siehe \ref{dip}). Der konrkete Calculator-Typ wird erst zur Laufzeit entschieden, da die Abhängigkeit über den Konstruktor injected wird, was den Namen des Patterns erklärt. Das bietet eine hohe Flexibilität, denn die Implementierungsdetails in \textit{PaymentTerms} stellen nun kein Problem mehr da. Wird ein anderer Berechnungstyp benötigt, kann von einem übergeordneten Modul aus einfach ein anderes \textit{IPaymentCalculator}-Objekt übergeben werden. Es ist anzumerken, dass Constructor Injection nur ein möglicher Typ von Dependency Injection ist. Es existieren zudem noch Setter Injection und Interface Injection \cite{dep}. Dependency Injection ist auch unter dem Namen Inversion of Control bekannt (\cite{SSA:12}, S.555).
+
+
+ \begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=1\textwidth]{images/dep_inj.png}
+	\caption{Constructor Dependency Injection (Abbildung basierend auf \cite{dep})}
+	\label{fig:dep_inj}
+\end{figure}
+
+
+\section{Erweiterbare Interfaces}
+Diese Architekturtaktik bezieht sich auf die Gestaltung von Interfaces. Ihnen sollte besondere Aufmerksamkeit zukommen, denn Änderungen an Interfaces haben den größten Einfluss auf das Systen und verursachen damit die größten Kosten. Wird beispielsweise ein Parameter einer Funktion geändert, müssen alle Klassen angepasst werden, welche das Interface implementieren und damit diese Funktion verwenden. \\
+Eine mögliche Lösung besteht darin, anstatt vieler Paramter Objekte oder andere strukturierte Datentypen in der Funktion zu übergeben. Alle Parameter sind dann als Attribute in der Klasse des Objekts vorhanden. Der Vorteil ist, dass Attribute sich optional gestalten lassen, indem sie mit Default-Werten initialsiert werden.\\
+Analog verhält es sich mit Information Interfaces. Anstelle von Objekten können selbstbeschreibende Nachrichtenformate übergeben werden, wie z.B. XML. Wenn das Nachrichtenformat es zulässt, wie XML, können Elemente optional gesetzt werden. \\
+Eine solch flexible Gestaltung von Interfaces geht zulasten von Verständlichkeit und Testbarkeit, da es beispielsweise nur schwer auffällt, wenn Elemente fehlen. Es kann zudem auch zu Performanzeinbußen kommen. Darum gilt es abzuwägen, welche Interfaces in Zukunft wahrscheinlich erweitert werden und eine solche Flexibilität benötigen (\cite{SSA:12}, S.553-554). 
+
+
+\section{Metamodell-basierte Architekturstile}
+Diese Architekturtaktik besteht darin, metamodell-basierte Architekturstile zu verwenden. Hierbei handelt es sich um eine sehr tiefgreifende Taktik, da der gesamte Architekturstil auf Evolution ausgerichtet wird (\cite{SSA:12}, S.555). Man bezeichnet sie auch als Metasysteme, da es sich um Systeme von Systemen handelt (\cite{meta}, S.1). \\
+Metamodell-basierten Architekturstile ist ein übergeordnetes Metamodell gemeinsam, welches das Zusammenspiel der Komponenten koordiniert. Die Konfigurationen des Metamodells entscheiden, wie die Komponenten zur Laufzeit zusammengesetzt werden. Oft reicht es, bei Änderungen die Konfigurationen des Metamodells anzupassen. Da die Konfigurationen jedoch zur Laufzeit eingelesen und umgesetzt werden, sind Metasysteme im Hinblick auf Performanz eingeschränkt. Der hohe Grad an Flexibilität schlägt sich zudem auch in einer erhöhten Komplexität nieder, die sowohl das Entwickeln als auch das Testen erschwert (\cite{SSA:12}, S.556).\\
+Es gibt verschiedene Arten von Metasystemen. Es sei an dieser Stelle ein Beispiel genannt. \\
+Nach \cite{meta} ist ein Metasystem ein \glqq groß angelegtes, verteiltes System, dessen Komponenten Enterprise-Systeme sind, die durch den Governance Mechanismus des Metamodells miteinander verknüpft sind, um ein gemeinsames strategisches Ziel zu erreichen\grqq (\cite{meta}, S.1, Z.66-73, eigene Übersetzung). Das übergeordnete Governance System leitet, überwacht und koordiniert alle Operationen des Metasystems. Die untergeordneten Enterprise-Systeme, d.h. die Komponenten des Systems, können bei Bedarf rekonfiguriert werden, ohne dass die Implementierung des Systems angepasst werden muss. Zudem lassen sich die Enterprise-Systeme austauschen, es lassen sich zudem Systeme entfernen und neue hinzufügen. Damit ist diese Architektur hochflexibel und passt sich einer sich ändernden Umgebung in co-evolutionärer Weise an (\cite{meta}, S.2). Anwendung findet ein solcher Architekturstil beispielsweise bei großen Energieverteilungs-, Informations- oder Kommunikationsnetzwerken oder auch bei Netzwerken, welche die Luftfahrt kontrollieren. Dort müssen die Systeme sich an ständig ändernde Informationen und Bedingungen anpassen. Nachteil ist hierbei, wie bei allen Metamodell-basierten Systemen, eine hohe Komplexität (\cite{meta}, S.1). \\
+Nicht alle Metasysteme sind gleich so komplex, dass sie sich aus mehreren Enterprise-Systemen zusammensetzen. Das Beispiel soll jedoch veranschaulichen, dass Kosten und Nutzen beim Einsatz eines solchen Stils abgewägt werden müssen. Nur, wenn wirklich ein solch hoher Grad an Flexibilät benötigt wird, sollten Metamodelle zum Einsatz kommen. 
+
+
 
 
 \section{Variation Points}
-Lokale Design-Lösungen, um bestimmte Änderungen an bestimmten Stellen im System zu unterstützen, wobei der Begriff ursprünglich aus der Produktlinien-Architektur stammt (\cite{SSA:12}, S.554). \\
-Hier auch Kosten-Nutzen abwägen, ob die Variation Points wirklich gebraucht werden.
-\subsection{Elemente austauschbar machen}
-Implementierung und Interface getrennt halten, s.d. die Implementierung jederzeit ausgetauscht werden kann (Abhängigkeit nur vom Interface)(\cite{SSA:12}, S.554).
-\subsection{Konfigurationen verwenden}
-Systemverhalten durch Parametrisierung steuern (\cite{SSA:12}, S.554). Dann können einfach die Parameter ausgetauscht werden.
-\subsection{Self-Describing Data und Generic Processing}
-Anstatt hard-coden mitgelieferte Informationen über die Daten nutzen, um diese generisch zu verarbeiten (\cite{SSA:12}, S.554).
-\subsection{Physische und Logische Verarbeitung getrennt halten}
-Einfacher wenn physiches Format sich ändert, z.B. CSV zu XML (\cite{SSA:12}, S.554)
-\subsection{Prozesse in Schritte unterteilen}
-Dann lassen sich die einzelnen Schritte leichter abändern (\cite{SSA:12}, S.554)
-\\
-\cite{varp}
+Diese Architekturtaktik besteht darin, Variation Points zu verwenden. 
+Dies sind lokale Design-Lösungen, um bestimmte Änderungen an bestimmten Stellen im System zu unterstützen. Hierbei müssen die Stellen, an denen Variation Points erforderlich sind, identifiziert werden. (\cite{SSA:12}, S.556). \\
+Im ersten Abschnitt werden allgemeine Vorgehensweisen präsentiert, worauf im zweiten Abschnitt konkrete Design-Patterns folgen, mit denen sich Variability realsieren lässt. 
 
+\subsection{Vorgehensweisen} 
+Ein mögliches Vorgehen besteht darin, Elemente austauchbar zu gestalten.
+Werden die SOLID-Prinzipien konsequent befolgt, ist dies kein Problem. Im Idealfall sind Implementierung und Interface getrennt und die Implementierung hängt vom Interface ab. Dann kann die Implementierung des Interfaces durch eine andere Implementierung des Interfaces ausgetauscht werden. Dies entspricht sowohl dem DIP (siehe \ref{dip}) als auch dem LSP (siehe \ref{lsp}). \\
+Eine weitere Vorgehensweise besteht darin, Konfigurationen zu verwenden.
+Bestimmte Teile des Systemverhaltens lassen sich durch Parametrisierung steuern. Dann lassen sich Änderungen oft alleine durch das Anpassen der Parameter realisieren. . \\
+Variation Points können außerdem erreicht werden, indem selbstbeschreibende Daten sowie eine generische Verarbeitungsweise gewählt werden.
+Bei solchen selbstbeschreibenden Datenformaten wie z.B. XML lassen sich die Informationen nutzen, um die Daten generisch zu verarbeiten. \\
+Außerdem ist es von Vorteil, die Verarbeitung des Datenformats von der logischen Verarbeitung getrennt zu halten. Dann lässt sich das Datenformat wesentlich einfacher ändern, wie z.B. beim Umstieg von CSV zu XML. \\
+Zudem sollten größere Prozesse stets in Teilschritte unterteilt werden. Dies bietet den Vorteil, dass einzelne Schritte austauschbar sind (\cite{SSA:12}, S.556-557).
+
+
+\subsection{Beispiele}
+In diesem Abschnitt werden Design-Patterns vorgestellt, die Variability ermöglichen. 
+
+\subsubsection{Facade}
+Dieses Pattern bietet Variability bei der Verwendung von Biblithoken, Frameworks oder einer anderen komplexen Menge an Klassen, indem 
+es eine vereinfachte Schnittstelle zu jenen Elementen zur Verfügung stellt (\cite{pat}, S.210). Diese Schnittstelle enthält nur die Methoden, die wirklich benötigt werden. Damit ist das System nicht mehr so stark an die externe Bibliothek, das Framework etc. gekoppelt und Änderungen daran, die zu erwarten sind, wirken sich weniger stark aus (\cite{pat}, S.211). Upgrades zu neueren Versionen oder das Austauschen der Software hinter der Schnittstelle stellen mit diesem Design-Pattern kein Problem mehr dar (\cite{pat}, S.214). 
+
+\subsubsection{Template Method}
+Dieses Design Pattern bietet Variation Points innerhalb eines Algorithmus. Das Template Method Pattern definiert das Grundgerüst eines Algorithmus in der Superklasse und lässt Subklassen bestimmte Schritte des Algorithmus überschreiben, ohne dabei die Struktur des Algorithmus zu verändern. Die Verwendung bietet sich dann an, wenn der Algorithmus zwar grundlegend gleich bleibt, aber Details stellenweise angepasst werden müssen. 
+Beispielsweise ist in einer Data-Mining-Anwendung Variabilität bezüglich des Datenformats erforderlich. Der Algorithmus sollte nicht jedes Mal neu geschrieben werden müssen, wenn auf ein anderes Datenformat, z.B. von CSF auf PDF, umgestiegen wird.
+ Der Algortihmus wird hierzu in einzelne Methoden unterteilt, wobei jede Methode einen Schritt darstellt. Die Abfolge dieser Methoden wird in eine einzige übergreifende Template Method geschrieben, die entweder abstrakt ist oder eine Default-Implementierung aufweist. Die Subklasse implementiert dann alle abstrakten Schritte und überschreibt bestimmte Methoden, wenn dies benötigt wird (\cite{pat}, S.381-383).
+
+
+
+%\subsubsection{Chain of Responsibility}
+
+%\subsubsection{Template Method}
+%\subsubsection{Visitor}
+%objectifier pattern
+%Template and hook
+%Template class https://refactoring.guru/design-patterns/template-method
+% Dimensional Class Hierarchies
+% Bridge https://refactoring.guru/design-patterns/bridge
+% Visitor https://refactoring.guru/design-patterns/visitor
+% Facet Classifications
+ 
+\subsubsection{Weitere Patterns}
+ Weitere Patterns, die Variability erlauben, sind Bridge (\cite{pat}, S.163-177), Chain of Responsibility (\cite{pat}, S.250-267) sowie das Visitor Pattern (\cite{pat}, S.393-408).
 
 
 \section{Extension Points}
-In Standard-Technologien bereits eingebaute Möglichkeiten, um Änderungen zu unterstützen (\cite{SSA:12}, S.554). Beispielsweise Custom Adapter schreiben
-\section{Sicherheit bei Änderungen}
+Diese Architekturtaktik besteht darin, Extension Points zu nutzen.
+Extension Points sind Schnittstellen für Erweiterungen (\cite{extension}, S.1). Sie geben vor, an welchen Stellen des Systems Erweiterungen anknüpfen sollen und welche Voraussetzung diese Erweiterungen erfüllen müssen. \\
+Hinter Extension Points steht ein Extension Mechanismus, d.h. die Art und Weise wie die Erweiterung intern vom System unterstützt und umgesetzt wird, inklusive Berücksichtigung der Software-Umgebung (\cite{extension}, S.1). \\
+Bei vielen Standardsoftwares werde Extension Points mitgeliefert, sodass an diese angeknüpft werden kann. So unterstützt die J2EE Plattform beispielsweise die Anbindung neuer Datenbanktypen und externer Systeme(\cite{SSA:12}, S.558). Ein anderes Beispiel für Standardsoftware, die Extension Points anbietet, stellt Eclipse dar \cite{extension}. Plug-Ins können an diese Extension Points anknüpfen (\cite{eclipse}).\\
+Die Vorteile bestehen darin, dass den Entwicklern bei der Erweiterung eine Menge Arbeit abgenommen wird. Zudem ist klar, wo erweitert werden muss und wie. Dennoch sollten Extension Points nicht blind genutzt werden, denn schlecht umgesetzte Extension Mechanisms können Performanzeinbußen und erhöhte Komplexität mit sich bringen (\cite{extension}, S.6). \\
+Es kann sinnvoll sein, selbst Extension Points in das System enzubauen, wenn klar ist, dass andere Entwickler in Zukunft das System erweitern werden. \\
+Sollte ein Extension Point nicht passen, kann das Adapter Design-Pattern verwendet werden. Es erlaubt Objekten mit inkompatiblen Schnittstellen
+ dennoch zusammenzuarbeiten (\cite{pat}, S.150). 
+
+
+
+\section{Reliable Change}
+Bei dieser Architekturtaktik geht es darum, Änderungen so zuverlässig und sicher wie möglich umzusetzen (\cite{SSA:12}, S.558). Es gibt einige Maßnahmen, um dies zu erreichen. \\
+
 \subsection{Konfigurationsmanagement}
-\subsection{Automatisierte Build-Prozesse}
-\subsection{Dependency analysis}
-\subsection{Automatisierte Release Prozesse}
-\subsection{Zurücksetzen}
-\subsection{Environment Konfigurationsmanagement}
-\subsection{Automatisiertes Testen}
+An erster Stelle ist hier das Konfigurationsmanagement zu nennen. Konfigurationsmangament fasst alle Aktivitäten zusammen, die zur Verwaltung der Konfigurationen dienen (\cite{SWT:12}, S.253, Z.29-30). Eine Konfiguration ist \glqq die Anordnung eines Computersystems bzw. einer Komponente oder eines Systems, wie sie durch Anzahl, Beschaffenheit und Verbindung seiner Bestandteile definiert ist \grqq (\cite{SWT:12}, S.253, Z.24-26). Für Konfigurationsmanagement exisiteren zahlreiche Tools, die eingesetzt werden können. Konfigurationsmanagement schließt Versionskontrolle mit ein (\cite{SWT:12}, S.205).
+
+\subsection{Automatisieren}
+Vorgänge wie der Build-Prozess, der Release-Prozess und das Testen sollten automatisiert werden. So werden die Prozesse zuverlässig, konsistent und lassen sich wiederholen mit demselben Ergebnis. \\
+Automatisiertes Testen sollte auf keinen Fall vernachlässigt werden, denn es ist wichtig, sicherzustellen, dass sich mit den Änderungen keine Fehler eingeschlichen haben. Dafür müssen hunderte bis tausende Tests durchgeführt werden, was sich manuell nicht mit vertretbarem Aufwand erreichen lässt (\cite{SSA:12}, S.559). Auch für das Automatisierte Testen existieren zahlreiche Tools.
+\subsection{Dependency Analysis}
+Eine Depency Analysis lässt sich mit Tools durchführen und gibt hilfreichen Aufschluss über unentdeckte Abhängigkeiten, die sonst eventuell übersehen worden wären. Anhand von Dependency Analysis lassen sich die Auswirkungen von Änderungen abschätzen (\cite{SSA:12}, S.558).
+
 \subsection{Continuos Integration}
-\subsection{Entwicklungsumgebung sichern}
+Continuous Integration beschreibt die Vorgehensweise, geänderte oder neue Systemelemente so bald wie möglich in das System zu integrieren und zu testen (\cite{SSA:12}, S.559). \\
+Es ist hingegen zu vermeiden, zu warten und alle Elemente auf einmal zu integrieren. Eine solche nicht inkrementelle \textit{big bang} Integration sorgt dafür, dass alle Probleme gleichzeitig auftreten. Die Lokalisierung und Behebung von Fehlern wird unnötig erschwert (\cite{SWT:12}, S.60).
+\subsection{Änderungen zurücksetzen}
+Nichts bietet so viel Sicherheit wie die Option, eine Änderung jederzeit wieder rückgängig machen zu können. Wenn Konfigurationsmanagement beachtet wird, gibt es zwangsläufig eine Versionsverwaltung. Wird hierfür z.B. das Versionsverwaltungssystem Git verwendet, können Änderungen einfach rückgängig gemacht werden, z.B. mittels der Befehle \textit{git revert} oder \textit{git reset}.
 
