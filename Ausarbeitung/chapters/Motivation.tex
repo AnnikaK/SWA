@@ -4,23 +4,40 @@
 
 \section{Einordnung von Änderungen}
 
+Um sich mit der Evolution von Software zu befassen ist es zunächst einmal wichtig zu verstehen welche Arten von Änderungen es gibt, bzw wie sich Änderungen einordnen lassen. Daher beschäftigt sich dieser Abschnitt mit verschieden Kategorien nach welchen sich Änderungen einordnen lassen, um diese zu Managen.
 
-\subsection{Ausmaß von Änderungen}
+\subsection{Ausmaß und Auswirkung von Änderungen}
+Nicht jede Änderung besitzt das Gleiche Ausmaß. \\
+So gibt es Systeme in denen nur kleine Änderungen vorkommen. 
+Diese könnten z.B. kleinere Fehlerkorrekturen (ohne große Auswirkung auf das bestehende System) oder kleinere Kosmetische Anpassungen sein. (\cite{SSA:12},S.645)\\
+Auf der anderen Seite des Spektrums gibt es Änderungen, welche in ihrem Ausmaß sehr groß sind und sich erheblich auf das bestehende System auswirken.\\
+Hierunter fallen z.B. langlebige Systeme, welche einem kontinuierlichen Prozess starker Evolution unterliegen, um auf die sich ständig verändernden Notwendigkeiten und Anforderungen der Umgebung angepasst zu sein, sodass diese Systeme aller paar Jahre quasi neu geschrieben werden. (\cite{SSA:12},S.645)\\
+Es ist wichtig, die erwarteten Änderungen hierauf zu analysieren und einzuordnen, da große Kosten entstehen, wenn nur kleinere Änderungen erwartet werden, jedoch später große Änderungen benötigt werden. Teilweise ist in solch einer Situation die Neuentwicklung die Einzig praktikable Lösung. (\cite{SSA:12},S.645)\\
 
 \subsection{Dimensionen von Änderungen}
+Es gibt verschiedene Arten von Änderungen. Diesen verschiedenen Arten benötigen unterschiedliche Unterstützung(smöglichkeiten) durch die Architektur. Daher ist es wichtig zu erkennen um welche Art es sich bei erwarteten Änderungen handelt, sodass Diese unterstützt werden.
+Im Buch "Software Systems Architecture"(\cite{SSA:12},S.646) von Nick Rozanski und Eoin Woods wurden folgende Arten als Dimensionen von Änderunge (Dimensions of Change) herausgearbeitet:
 
 \paragraph{Funktionale Evolution}
+Die Dimension der Funktionalen Evolution beschreibt alle Änderungen an der Funktionalität einer Software. Alle Funktionalitätsänderungen, von einfachen Fehlerbehebungen bis hin zum Hinzufügen oder Ersetzen von kompletten Teilsystemen, fallen hierunter. 
 
 \paragraph{Plattform Evolution}
+Diese Dimension beinhaltet alle Änderungen der Hard- und Softwareumgebung auf denen ein System läuft.
+Hierunter fallen z.B. alle Migrationen und Portierungen auf andere Betriebssysteme, andere Hardware oder das ändern von Clients zu plattformunabhängigen webbasierten Ansätzen.
 
 \paragraph{Integration Evolution}
+Da viele Softwaresysteme nicht alleine arbeiten, sondern nur im Zusammenwirken mit anderen Systemen funktionieren, müssen diese Softwaresysteme in ein Gesamtsystem integriert werden. Da sich die Daten,sowie deren Struktur, welche von anderen Systemen benötigt oder zur Verfügung gestellt werden, aufgrund von unabhängigen Änderungen der Systeme ändern können, muss diese Art der Änderung auch berücksichtigt werden, obwohl sich gar nichts an der Funktionalität ändert.
 
 \paragraph{Wachstum}
+Viele erfolgreiche Systeme wachsen mit der Zeit. Dies kann Einfluss auf die  Evolution nehmen. So kann sich durch das Wachstum des Systemes  die Anzahl der Transaktionen so wie deren Komplexität stark erhöhen oder es gibt mehr Benutzer und Daten. Daher muss ggf. das System daraufhin angepasst werden.\\
+Besonders bei Systemen mit Internetanbindung kann dies sehr beträchtlich und unvorhersehbar werden.
+So gibt es hier z.B. die Abwägung zu viel Geld für einen Server auszugeben, für die Eventualität, dass das System schnell erfolgreich wird oder lieber weniger Geld für den Server mit der Gefahr, dass das System durch zu viele Anfragen überlastet wird.
+In den Vorträgen zum Architekturstil Microservices wurden Ansätze zu dynamischer Serverskalierung AWS (Amazon Web Services) vorgestellt.
+  
+\subsection{Wahrscheinlichkeit und Zeit von Änderungen}
 
-\subsection{Änderungen über Zeit}
 
-
-
+%%__________________________________________________________________
 \section{Die Evolutionsperspektive}
 
 \subsection{Warum keine Evolutionsview oder kein Evolutionsviewpoint?}
