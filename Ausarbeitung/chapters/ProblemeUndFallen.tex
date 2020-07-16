@@ -2,12 +2,74 @@
 
 %%________________________________________________________________
 \section{Statische ADL's}
+Um Sowfwarearchitekturen zu beschreiben wurden viele Architecture Description Languages (ADLs) entwickelt.
+In diesen ADLs lässt sich gut die Geschäftslogik abbilden. Viele dieser ADLs ermöglichen es ein Model der Komponentenstruktur und des verhalten zu erstellen und  dienen als Grundlage für die Integrationstests.\cite{SAE}
+\paragraph{Problem}
+Viele dieser ADLs bieten keine Repräsentation für die Evolution. \cite{SAE}
+\paragraph{Risiko/Folgen}
+Durch die statische Natur der Modelle aus diesen ADLs ist es aufwändig die Änderungen zu pflegen. Dadurch kann es dazu kommen, dass die Software geändert wird, das ursprünglich Architekturmodell jedoch nicht. Dies verstößt gegen den Concern Erhaltung von Wissen.\ref{Wissen}
+Ein anderes Problem dadurch kann sein, dass das Architekturmodell manuell Aktualisiert wird, jedoch inkonistenzen eingebaut werden. \cite{SAE}
+\paragraph{Risikoreduzierung}
+Eine Möglichkeit dies zu umgehen, ist die Verwendung von ADLs, welche auch Änderungsmöglichkeiten beinhalten. Dafür gibt es mehrere Ansätze:
+\subparagraph{Explizit Dynamische ADLs}:\\
+In diesen ADLs werden die Dynamischen Aspekte spezifiziert. Jedoch ist es sehr anspruchsvoll alle möglichen Änderungen explizit zu formulieren.
+In diese Kategorie fallen z.B. Wright oder AADL.\\
+(\cite{SAE} S.10)
+\subparagraph{ Dynamische ADLs mit Rahmen}:\\
+In diesem Ansatz wird ein Rahmen für die möglichen Änderungen definiert.
+Die Probleme hierbei sind, dass diese Modelle häufig nicht in Verbindung mit den Komponenten basierten stehen, sondern eher als eine Art der Repository zur Evaluation von expliziten Änderungen zu sehen ist. Das andere Problem besteht darin, das die Anzahl der erlaubten Architekturen in vielen fällen unendlich ist und die Modelchecker die Evaluation von unendlich großen Architekturfamilien nicht unterstützen.Beispiele für diese Kategorie wären UML2.0, SafArchie, ACL und ArchStudio.\\(\cite{SAE} S.12)
+\paragraph{Aspektorientierte ADLs}
+Hier werden die  Aspect-Oriented Software Development (AOSD) Prinzipien direkt auf Architekturebene innerhalb der ADLs angewandt.
+Dies ist durchaus sinnvoll, da die Aspektorientierte Programmierung eine Möglichkeit ist mit Cross-Cutting-Concern umzugehen, und in der Softwarearchitektur die Perspektiven auch Cross-Cutting-Concern  beinhalten.
+Als ADLs dieser Kategorie seien Fractal Aspect Component (FAC) und TranSAT zu nennen.\\(\cite{SAE} S.12ff)
+Im Folgenden wird erklärt, wie es mit TranSAT möglich ist, die Architektur um neue Concerns zu erweitern. 
+
 
 \subsection{TranSAT}
 \paragraph{Exkurs Aspekt Orientierte Programmierung}
+Aspektorientierte Programmierung (AOP) ist ein Programmierparadigma, welches durch Überlegungen aus dem Prinzip Seperation Of Concerns \ref{seperation} hervorgegangen ist. Mit klassischen Objekt Orientierten Ansätzen lassen sich die Geschäftslogik gut in einzelne gut trennbare Module aufteilen. Jedoch gibt es neben der Geschäftslogik noch weitere Concerns, meist technische wie Logging oder Security, für welche dann der Code verteilt über die einzelnen (geschäfts-)Logischen Modulen vorhanden sind. Diese Cross-Cutting-Concerns hier Aspekte genannt, in eigene Module ausgelagert. Dazu werden sogenannte pointcuts spezifiziert, in welchen Aspekte angewendet werden sollen. Als Beispiel etwa: Logge alle Funktionsaufrufe, deren Name mit set beginnt. Dabei wird der Code der Geschäftslogik nicht verändert, sonder über eine Weaving-Funktion miteinander untereinander vernetzt. In \ref{fig:aop} ist zu sehen, wie sich die Modularität aufgrund des Ansatzes verbessert.
+Eines der ersten und wohl bekanntesten Frameworks ist AspectJ, welches Java um das AOP paradigma erweitert.\\
+\cite{AOP}
 
+ \begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{images/aspect.jpg}
+	\caption{Cross Cutting Concerns in AspectJ (Abbildung aus \cite{asp})}
+	\label{fig:aop}
+\end{figure}
+
+\newpage
 \paragraph{TranSAT Struktur}
+TranSAT (Transform Software Architecture Technologies) ist ein Framework, welches es ermöglicht bestehende Softwarearchitekturmodelle um neue Concerns zu erweitern. Dabei lässt TranSAT nur konsistente Veränderungen zu.\\
+Dafür besitzt TranSAT  ein Basissoftwarearchitekturmodel bzw. auch Softwarearchitekturspezifikation genannt welches die bisherige Architektur beschreibt. Dieses kann dann mit den Prinzipien der Aspekt Orientierte Programmierung durch neue Concerns erweitert werden. Typische Concerns sind persistence, security oder Transaktionsmanagement.\\
+\cite{SAE},\cite{TranSAT}\\
+\subparagraph{Concerns:}
+Dafür müssen die Concerns unabhängig von dem bestehenden Basissoftwarearchitekturmodel bzw. des Kontextes spezifiziert werden. Dies ermöglicht zudem noch eine leichtere Wiederverwendung der Concerns.\\
+Häufig sind diese neuen Concerns Cross-Cutting-Concerns, alse sie verändern mehrere Geschäftslogikkomponenten, sowie das Interaktionsverhalten zwischen verschiedene Komponenten.\\
+Dafür müssen dann die Integrationsregeln spezifiziert werden.\\
+Damit TranSAT aus dem Basissoftwarearchitekturmodel und dem Concern ein neues Softwarearchitekturmodell erstellen kann, werden wie in \ref{fig:TranSAT} zu sehen die Konzepte des Adaperts und des Weavers verwendet.\\
+\cite{TranSAT}\\
+\subparagraph{Adapter:}
+Im Adapter sind wie in \ref{fig:TranSAT2} zu sehen, die Integrationsregeln spezifiziert. Der Adapter kennt den Kontext nicht, besitzt jedoch wie in \ref{fig:TranSAT2} zu sehen eine Point-Cut-Mask. Die Point-Cut-Mask eine Art Vertrag, welcher Definiert, wie die Umgebung auszusehen hat, damit der Concern richtig in die Architektur integriert werden kann.\\
+\cite{TranSAT}\\
+\subparagraph{Weaver:}
+Der Weaver vergleicht die Informationen aus dem Adapter mit denen des bestehendes Basisarchitekturmodels. Dabei vergleicht er die Point-Cut-Mask des Concerns mit der Point-Cut-Definition im Basisarchitekturmodel und prüft ob die Integrationsregeln angewandt werden können. Dann fügt er den neuen Concern gemäßt der Integrationsregeln an den Stellen in das Basisarchitekturmodell an denen die Point-Cut-Mask und  die Point-Cut-Definition übereinstimmen ein und erzeugt so ein neues Architekturmodell\ref{fig:TranSAT}.\\
+\cite{TranSAT}\\
 
+ \begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{images/TranSAT.png}
+	\caption{TranSat Übersicht (Abbildung aus \cite{TranSAT} S.4)}
+	\label{fig:TranSAT}
+\end{figure}
+
+
+ \begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{images/TranSAT2.png}
+	\caption{TranSat meta-model (Abbildung aus \cite{TranSAT} S.5)}
+	\label{fig:TranSAT2}
+\end{figure}
 \paragraph{TranSat Demo: Bankanwendung}
 
 \subparagraph{Erweitrung um Atomaritäts Concern}

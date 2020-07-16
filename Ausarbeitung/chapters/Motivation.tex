@@ -4,29 +4,29 @@
 
 \section{Einordnung von Änderungen}\label{einordnung}
 
-Um sich mit der Evolution von Software zu befassen ist es zunächst einmal wichtig zu verstehen, welche Arten von Änderungen es gibt, bzw. wie sich Änderungen einordnen lassen. Daher beschäftigt sich dieser Abschnitt mit verschieden Kategorien nach welchen sich Änderungen einordnen lassen, um diese zu managen.
+Um sich mit der Evolution von Software zu befassen ist es zunächst einmal wichtig zu verstehen welche Arten von Änderungen es gibt, bzw wie sich Änderungen einordnen lassen. Daher beschäftigt sich dieser Abschnitt mit verschieden Kategorien nach welchen sich Änderungen einordnen lassen, um diese zu Managen.
 
 \subsection{Ausmaß und Auswirkung von Änderungen}
-Nicht jede Änderung besitzt das gleiche Ausmaß. \\
+Nicht jede Änderung besitzt das Gleiche Ausmaß. \\
 So gibt es Systeme in denen nur kleine Änderungen vorkommen. 
-Diese könnten z.B. kleinere Fehlerkorrekturen (ohne große Auswirkung auf das bestehende System) oder kleinere kosmetische Anpassungen sein. (\cite{SSA:12},S.545)\\
+Diese könnten z.B. kleinere Fehlerkorrekturen (ohne große Auswirkung auf das bestehende System) oder kleinere Kosmetische Anpassungen sein. (\cite{SSA:12},S.545)\\
 Auf der anderen Seite des Spektrums gibt es Änderungen, welche in ihrem Ausmaß sehr groß sind und sich erheblich auf das bestehende System auswirken.\\
 Hierunter fallen z.B. langlebige Systeme, welche einem kontinuierlichen Prozess starker Evolution unterliegen, um auf die sich ständig verändernden Notwendigkeiten und Anforderungen der Umgebung angepasst zu sein, sodass diese Systeme aller paar Jahre quasi neu geschrieben werden. (\cite{SSA:12},S.545)\\
-Es ist wichtig, die erwarteten Änderungen hierauf zu analysieren und einzuordnen, da große Kosten entstehen, wenn nur kleinere Änderungen erwartet werden, jedoch später große Änderungen benötigt werden. Teilweise ist in solch einer Situation die Neuentwicklung die einzig praktikable Lösung. (\cite{SSA:12},S.545)\\
+Es ist wichtig, die erwarteten Änderungen hierauf zu analysieren und einzuordnen, da große Kosten entstehen, wenn nur kleinere Änderungen erwartet werden, jedoch später große Änderungen benötigt werden. Teilweise ist in solch einer Situation die Neuentwicklung die Einzig praktikable Lösung. (\cite{SSA:12},S.545)\\
 
 \subsection{Dimensionen von Änderungen}
-Es gibt verschiedene Arten von Änderungen. Diese verschiedenen Arten benötigen unterschiedliche Unterstützung(smöglichkeiten) durch die Architektur. Daher ist es wichtig zu erkennen, um welche Art es sich bei erwarteten Änderungen handelt, sodass diese unterstützt werden.
-Im Buch "Software Systems Architecture"(\cite{SSA:12},S.646) von Nick Rozanski und Eoin Woods wurden folgende Arten als Dimensionen von Änderunge (Dimensions of Change) herausgearbeitet:
+Es gibt verschiedene Arten von Änderungen. Diesen verschiedenen Arten benötigen unterschiedliche Unterstützung(smöglichkeiten) durch die Architektur. Daher ist es wichtig zu erkennen um welche Art es sich bei erwarteten Änderungen handelt, sodass Diese unterstützt werden.
+Im Buch "Software Systems Architecture"(\cite{SSA:12},S.546) von Nick Rozanski und Eoin Woods wurden folgende Arten als Dimensionen von Änderunge (Dimensions of Change) herausgearbeitet:
 
 \paragraph{Funktionale Evolution}
 Die Dimension der Funktionalen Evolution beschreibt alle Änderungen an der Funktionalität einer Software. Alle Funktionalitätsänderungen, von einfachen Fehlerbehebungen bis hin zum Hinzufügen oder Ersetzen von kompletten Teilsystemen, fallen hierunter. 
 
 \paragraph{Plattform Evolution}
 Diese Dimension beinhaltet alle Änderungen der Hard- und Softwareumgebung auf denen ein System läuft.
-Hierunter fallen z.B. alle Migrationen und Portierungen auf andere Betriebssysteme, andere Hardware oder das Ändern von Clients zu plattformunabhängigen webbasierten Ansätzen.
+Hierunter fallen z.B. alle Migrationen und Portierungen auf andere Betriebssysteme, andere Hardware oder das ändern von Clients zu plattformunabhängigen webbasierten Ansätzen.
 
 \paragraph{Integration Evolution}
-Da viele Softwaresysteme nicht alleine arbeiten, sondern nur im Zusammenwirken mit anderen Systemen funktionieren, müssen diese Softwaresysteme in ein Gesamtsystem integriert werden. Da sich die Daten sowie deren Struktur, welche von anderen Systemen benötigt oder zur Verfügung gestellt werden, aufgrund von unabhängigen Änderungen der Systeme ändern können, muss diese Art der Änderung auch berücksichtigt werden, obwohl sich gar nichts an der Funktionalität ändert.
+Da viele Softwaresysteme nicht alleine arbeiten, sondern nur im Zusammenwirken mit anderen Systemen funktionieren, müssen diese Softwaresysteme in ein Gesamtsystem integriert werden. Da sich die Daten,sowie deren Struktur, welche von anderen Systemen benötigt oder zur Verfügung gestellt werden, aufgrund von unabhängigen Änderungen der Systeme ändern können, muss diese Art der Änderung auch berücksichtigt werden, obwohl sich gar nichts an der Funktionalität ändert.
 
 \paragraph{Wachstum}
 Viele erfolgreiche Systeme wachsen mit der Zeit. Dies kann Einfluss auf die  Evolution nehmen. So kann sich durch das Wachstum des Systemes  die Anzahl der Transaktionen so wie deren Komplexität stark erhöhen oder es gibt mehr Benutzer und Daten. Daher muss ggf. das System daraufhin angepasst werden.\\
@@ -38,25 +38,25 @@ In den Vorträgen zum Architekturstil Microservices wurden Ansätze zu dynamischer
 
 
 \paragraph{Second-system effect}
-In der Praxis der Softwareentwicklung ist der so genannte \glqq Second-system effect\grqq häufig zu finden. Dieser beschreibt, dass zunächst ein einfaches System gebaut wird. Soll das erste System abgelöst werden, tendiert das zweite System dazu, dass es übergenerisch und dadurch sehr komplex entwickelt wird.\cite{SSE:00}
+In der Praxis der Softwareentwicklung ist der so genannte \glqq Second-system effect \grqq häufig zu finden. Dieser beschreibt, dass zunächst ein einfaches System gebaut wird. Soll das erste System abgelöst werden, tendiert das zweite System dazu, dass es übergenerisch und dadurch sehr komplex entwickelt wird.\cite{SSE:00}
 
-\paragraph{Unnütze Komplexität vs komplizierte Änderungen/Zeitpunkt des Kostenanfalls}
-Anhand des Second-system effects lassen sich zwei Strategien für den Kostenanfall von Änderungen erkennen. Der eine Ansatz ist, dass das System möglichst \glqq einfach\grqq  gestaltet wird: Anforderungen werden, dann wenn sie kommen, so einfach wie möglich umgesetzt (vgl. erstes System). Dieser Ansatz hat den Effekt, dass wenn später Änderungen hinzukommen es schwierig wird, diese einzubauen, da die Möglichkeit dafür in der Architektur nicht vorgesehen ist. \\
+\paragraph{Unnütze Komplexität vs komplizierte Änderungen/Zeitpunkt des Kostenanfalls}\label{komplex}
+Anhand des Second-system effect lassen sich zwei Strategien für den Kostenanfall von Änderungen erkennen. Der eine Ansatz ist, dass das System möglichst "einfach" gestaltet wird: Anforderungen werden, dann wenn sie kommen, so einfach wie möglich umgesetzt (vgl. erstes System). Dieser Ansatz hat den Effekt, dass wenn später Änderungen hinzukommen es schwierig wird diese Einzubauen, da die Möglichkeit dafür in der Architektur nicht vorgesehen sind. \\
 Also ein später Zeitpunkt für den Anfall der Kosten einer Änderung. Hierbei kann es sogar so kompliziert werden diese Änderungen einzubauen, dass sich die Neuentwicklung des Systemes mehr anbietet.\\
-Der andere Ansatz ist, die Software so zu strukturieren, dass Änderungen möglichst einfach einzubauen sind. Dies wäre beim \glqq Second-system effect\grqq das zweite System. Eine Software-Architektur, die möglichst viele Änderungen unterstützt, ist an und für sich meist sehr komplex damit zunächst teuer in der Entwicklung, bevor konkrete Funktionen vorhanden sind. Außerdem sind solche Systeme aufgrund ihrer Komplexität schwer zu verstehen und aufwändiger zu testen.\\
+Der andere Ansatz ist, die Software so zu strukturieren, dass Änderungen möglichst einfach einzubauen sind. Dies wäre beim "Second-system effect" das zweite System. Eine Software-Architektur, die möglichst viele Änderungen unterstützt, ist an und für sich meist sehr Komplex damit zunächst teuer in der Entwicklung, bevor konkrete Funktionen vorhanden sind. Außerdem sind solche Systeme aufgrund ihrer Komplexität schwer zu verstehen und aufwändiger zu testen.\\
 Hier ist der Zeitpunkt des Kostenanfalls für die Änderungen früh in der Entwicklung, da die Änderungen später einfach einzubauen sind.\\
 Insgesamt gilt es eine sinnvolle Abwägung zwischen diesen beiden Extremen zu finden, um Entwicklungskosten und -zeit zu minimieren.(\cite{SSA:12},S.547)\\
 
 \paragraph{Zeitraum von Änderungen}
 Je später eine erwartete Änderung erwartet wird, desto wahrscheinlicher ändert sich die erwartete Änderung bzw. fällt ggf. komplett weg.\\
-Daher gilt es Unterstützungsmöglichkeiten für näherliegende Änderungen zu priorisieren. (\cite{SSA:12}, S.547)
+Daher gilt es Unterstützungsmöglichkeiten für näherliegende Änderungen zu priorisieren.(\cite{SSA:12},S.547)
 
 \paragraph{Wahrscheinlichkeit von Änderungen}
-Mögliche Änderungen sind häufig einfach identifizierbar. Jedoch erhöht das Bereitstellen von Änderungsmöglichkeiten die Komplexität.
-Also sollten nur Möglichkeiten für wahrscheinliche Änderungen eingebaut werden.\\
+Mögliche Änderungen sind häufig einfach Identifizierbar. Jedoch erhöht das Bereitstellen von Änderungsmöglichkeiten die Komplexität.
+Also sollten nur Möglichkeiten für wahrscheinliche Änderungen Eingebaut werden.\\
 \\
 \\
-Die entsprechenden Analyseverfahren werden im Kapitel Aktivitäten im Abschnitt Analyse besprochen.
+Die Entsprechenden Analyseverfahren werden im Kapitel Aktivitäten im Abschnitt Analyse besprochen.
 
 %%__________________________________________________________________
 \section{Die Evolutionsperspektive}
@@ -64,42 +64,56 @@ Die entsprechenden Analyseverfahren werden im Kapitel Aktivitäten im Abschnitt A
 \subsection{Warum keine Evolutionsview oder kein Evolutionsviewpoint?}
 Die Frage warum die Evolution keine View oder kein Viewpoint ist lässt sich ähnlich beantworten, wie die Frage im Bezug der Security Perspektive in der Vorlesung beantwortet wurde.
 Die Anforderungen der Evolution sind nicht-funktionale Anforderungen, welche eine Betrachtung über verschiedene Architektur-Views erfordert.
-Daher ist es die Evolutionsperspektive. Im Folgenden werden wir gemäß der Vorlesung vorgehen:  Auf die Anwendbarkeit und die Concerns wird zunächst noch im Kapitel der Motivation eingegangen. Die Aktivitäten, Architekturtaktiken, und Probleme und Fallen bilden jeweils eigene Kapitel.
+Daher ist es die Evolutionsperspektive. Im Folgenden werden wir gemäß der Vorlesung vorgehen:  auf die Anwendbarkeit und die Concerns wird zunächst  noch im Kapitel der Motivation eingegangen. Die Aktivitäten, Architekturtaktiken, und Probleme und Fallen bilden jeweils eigene Kapitel.
 
 \subsection{Anwendbarkeit auf die Views}
 \paragraph{Kontext}
-Die Kontext View sollte externe Entities, Schnittstellen oder Interaktionen, welche für eine zukünftige Version benötigt werden, aufzeigen.
+Die Kontext View sollte externe Entities, Schnittstellen oder Interaktionen welche für eine Zukünftige Version benötigt werden aufzeigen.
 \paragraph{Funktional}
-Die Funktionale Struktur aus der Funktionalen View sollte es widerspiegeln, falls die Evolution signifikant ist.
+Die Funktionale Struktur aus der Funktionalen View sollte es widerspiegeln, falls die Evolution Signifikant ist.
 \paragraph{Information}
-Ein flexibles Informationsmodell wird erforderlich, falls Umgebungs- oder  Konformationsänderung benötigt werden.
+Ein flexibles Informationsmodell wird erforderlich, falls Umgebungs oder  Konformationsänderung benötigt werden.
 \paragraph{Concurrency}
 Die Berücksichtigung von Bedürfnissen aufgrund der Evolution kann bestimmte Arten des Elemente-Packagings oder der Concurrency-Struktur beeinflussen.
 \paragraph{Development}
-Die Evolutionsanforderungen können sich stark auf die Entwicklungsumgebung auswirken. Dies muss entsprechend definiert werden. Als ein Beispiel hierfür können Portabilitätsrichtlinien  dienen, welche eingehalten werden müssen.
+Die Evolutionsanforderungen können sich stark auf die Entwicklungsumgebung auswirken. Dies muss entsprechend definiert werden. Ein Beispiel hierfür können Portabilitätsrichtlinien  dienen, welche eingehalten werden müssen.
 \\
 \\
-Auf die anderen Views hat die Evolutionsperspektive keinen (größeren) Einfluss.\\(\cite{SSA:12},S.544-545)
+Auf die Anderen Views hat die Evolutionsperspektive keinen (größeren) Einfluss.\\(\cite{SSA:12},S.544-545)
 
 
 \subsection{Concerns}
-\label{concerns}
 \paragraph{Produktmanagement}
 Das Produktmanagement hat verschiedene Aufgaben. Es muss die Anwender- und Kundenbedürfnisse verstehen. Des weiteren  muss es die Bedrohungen und Möglichkeiten des Marktes erkennen. Darauf basierend sollte das Produktmanagement die Roadmap für die zukünftige Entwicklung erstellen.\\
 Dafür muss das Produktmanagement eng mit der Entwicklungsorganisation zum Liefern und Weiterentwickeln des entsprechenden Produktes zusammenarbeiten.\\
-In verschiedenen Agilen Softwareentwicklungsmethoden wird aufgrund der Wichtigkeit des Produktmanagements diese Rolle direkt in der Entwicklungsmethode eingebaut. So gibt es z.B. bei Scrum die Rolle des Product Owners, welche genau diese Aufgaben hat.\\
+In verschiedenen Agilen Softwareentwicklungsmethoden wird aufgrund der Wichtigkeit des Produktmanagements diese Rolle direkt in der Entwicklungsmethode eingebaut. So gibt es bei z.B. Scrum die Rolle des Product Owners, welche genau diese Aufgaben hat.\\
 Bezogen auf die Evolutionsperspektive liefert das Produktmanagement folgende Eigenschaften der Änderungen:\\
 Den Kontext und die Richtung der Änderungen des Systemes.\\
-Dies hilft dann beim systematischem Priorisieren von möglichen Änderungen. Außerdem erleichtert es durch die Berücksichtigung der Roadmap die Vermeidung von inkohärenten Feature-Mengen. 
+Dies hilft dann beim systematischem Priorisieren von möglichen Änderungen. Außerdem erleichtert es durch die Berücksichtigung der Roadmap die Vermeidung von inkohärenten Feature-Mengen. \\
+(\cite{SSA:12},S.545)
 
  
 
 \paragraph{Ausmaß, Dimensionen, Wahrscheinlichkeit und Zeit von Änderungen}
 Weshalb die Einordnung der Änderungen nach Ausmaß, Dimensionen, Wahrscheinlichkeit und Zeit wichtig ist wurde in \ref{einordnung} bereits besprochen.
 
-\paragraph{Externe Faktoren (außerhalb der Kontrolle der Stakeholder)}
-
+\paragraph{Externe Faktoren }
+Externe Faktoren, also Faktoren, welche außerhalb der Kontrolle der Stakeholder liegen, müssen in der durch die Evolutionsperspektive auch Berücksichtigt werden. Änderungen die durch externe Faktoren kommen, lassen sich auch durch die in \ref{einordnung} besprochenen weisen Kategorisieren, sind jedoch häufiger schwieriger zu handhaben, da sie außerhalb der Kontrolle der Stakeholder liegen.\\
+Einige Beispiele dafür könnten sein:\\
+- End-Of-life von benutzten oder geplanten Hardware- oder Softwarekomponenten.\\
+- Änderungen der Schnittstellen der verwendeten externen Entities\\
+- Änderungen von Vorschriften und Gesetzten, besonders wichtig wenn diese strenger werden wie die Datenschutzgrundverordnung oder die EPrivacy verordnung\\
+- Änderungen organisatorischer Art welche zu anderen Prioritäten, geänderten Anforderungen, Änderungen am Benutzerbestand sowie Transaktionsprofil führen\\
+(\cite{SSA:12},S.547-548)
 
 \paragraph{Entwicklungskomplexität}
-\paragraph{Erhaltung von Wissen}
+Wie bereits in \ref{komplex} besprochen, ist Eine Architektur, welche die Evolution unterstützt, ist häufig komplexer, als solche die nicht. Zudem sind die Kosten und die Entwicklungszeit für die erste Version meist teurer. Es kann sogar sein das diese erhöhte Komplexität bestimmte Änderungen erschwert.
+(\cite{SSA:12},S.548) 
+
+\paragraph{Erhaltung von Wissen}\label{Wissen}
+Während der Entwicklung ist das Wissen meist vorhanden, das Personal nur für die Entwicklung eines Projektes beschäftigt, und Änderungen erwartet. Sobald es ausgeliefert ist, und in den späteren Lebenszyklusphasen, ist häufig das Ursprüngliche Personal mit anderen Projekten beschäftigt. Jedoch können auch hier Änderungen anfallen. Im Laufe der Zeit können sich die verfügbaren technischen Umgebungen ändern und Deteils vergessen werden. Daher ist es wichtig, dass für diese Änderungen, z.B. durch Wartung, das Wissen erhalten bleibt.\\
+ (\cite{SSA:12},S.548) 
+ 
 \paragraph{Zuverlässigkeit von Änderungen}
+Selbst kleinste Änderungen, wie z.B. Bugfixes, können durchaus gravierende negative Auswirkungen auf ein eingesetzten System haben. Daher wird eine Menge von Prozessen und Technologien benötigt, die Sicherstellt, dass Änderungen zuverlässig sind. Solche werden in \ref{zuverl} besprochen.\\
+ (\cite{SSA:12},S.548) 
