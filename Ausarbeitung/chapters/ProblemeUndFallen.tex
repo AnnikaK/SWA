@@ -77,7 +77,7 @@ Der Weaver vergleicht die Informationen aus dem Adapter mit denen des bestehende
 \newpage
 %%________________________________________________________________
 \section{Undokumentierte Architekturen}
-In vielen Softwareprojekten gibt es keine Architekturdokumentationen. Auffällig ist, das viele OpneSource-Projekte die Architektur nicht dokumentieren.(\cite{Role}S.1)\\
+In vielen Softwareprojekten gibt es keine Architekturdokumentationen. Auffällig ist, das viele OpneSource-Projekte die Architektur nicht dokumentieren.(\cite{Role}S.246)\\
 Dies verstößt gegen den Concern Erhaltung von Wissen \ref{Wissen}.
 
 \paragraph{Ursachen}
@@ -88,51 +88,64 @@ Im Laufe der Zeit geht das Wissen über die Architektur verloren, falls es überha
 
 \paragraph{Folgenreduktion}
 Im laufe der Zeit wurden Verschiedene Techniken zum Reverseengineering der Architektur erarbeitet.\cite{Role}
-Beispiele dafür wären: Package View, Bunch View \cite{otam}, ArchDRH View \cite{ldrt},
-LDA View [3] and ACDC View [39].
-%%________________________________________________________________
-\section{Nicht Gewartete Architekturen/Architekurmodell Anders Als Implementierung}
+Beispiele dafür wären: Package View, Bunch View \cite{otam}, ArchDRH View \cite{ldrt}oder ACDC View \cite{acdc}.\\
+Sobald dies gemacht wurde, kann mit diese dann Analysiert,Evaluiert und verbessert werden.
 
+%%________________________________________________________________
+\section{Nicht Gewartete Architekturen/Architekturmodell Anders Als Implementierung}
+Viele Projekte besitzen zwar eine Architekturdokumentation, diese ist jedoch häufig nicht vertrauenswürdig.(\cite{Role}S.249)
 \paragraph{Ursachen}
+Viele Ansätze für ADLs entkoppeln den Implementierten Code von der Architekturbeschreibung.(\cite{Role} S.4)
 
 \paragraph{Folgen}
+Es kann dazu kommen, dass die Architekturbeschreibung nicht mit dem eigentlichen Code übereinstimmt und somit inkonsistent ist. Der Code kann dadurch geplante Architektureigenschaften verletzen. Und es wird Unübersichtlich, wenn Code und Architekturbeschreibung nicht übereinstimmen.
+Auch hier liegt ein verstoß gegen den Concern Erhaltung von Wissen \ref{Wissen} vor.
 
 \paragraph{Risikoreduktion}
+Es ist hilfreich ADLs zu verwenden, welche eng mit dem Code Gekoppelt sind. Beispiele dafür wären ArchJava, Fractal oder Sofa.(\cite{Role} S.4)
 
 \paragraph{Folgenreduktion}
-
+Sollte es sich eingeschlichen haben, dass das Architekturmodell anders ist als die Implementierung kann genauso vorgegangen werden, wie wenn keine Dokumentation vorliegt. Evtl. kann es hier sinnvoll sein das soll-modell und das ist-Modell zu vergleichen.
 
 %%________________________________________________________________
 \section{Priorisierung der Falschen Dimensionen}
 
 \paragraph{Ursachen}
+Bei der Festlegung für die Unterstützung Änderungsmöglichkeiten kann es vorkommen, dass die Dimensionen stärker berücksichtigt werden, die einem bekannt sind.\\
+Es ist auch möglich, dass bestimmte Dimensionen wichtiger erscheinen, als sie sind, da  lautstarke Stakeholder diese besonders häufig erwähnen.
 
 \paragraph{Folgen}
+Die Software wird zu komplex und zu teuer. Außerdem ist es möglich, dass sollten Änderungen in anderen Dimensionen von Nöten sein diese sogar schwieriger werden als wenn die Software mit einer einfacheren Architektur implementiert worden wäre.
 
 \paragraph{Risikoreduktion}
+Es sollte nur nach ausreichender Analyse entsprechende Unterstützung für die Änderungen eingebaut werden, um diese richtig zu priorisieren.\\
+(\cite{SSA:12}S.560)
 
 
 %%________________________________________________________________
 \section{Änderungen die nie kommen}
-
+Es ist schlichtweg unmöglich eine Softwarearchitektur mit vertretbaren Kosten und Risiken zu entwickeln, welche alle möglichen Änderungen unterstützt.(\cite{SSA:12}S.561)
 \paragraph{Ursachen}
-
+Bei der Entscheidung, welche Arten von Änderungen unterstützt werden, wurde falsch entschieden.
 \paragraph{Folgen}
-
+Die Unterstützung von Änderungen verurscht Overhead im Design, in der Implementierung und häufig auch zur Laufzeit. Daher verursacht es unnötige Kosten, wenn die Änderungen die Unterstützt werden nie kommen.
 \paragraph{Risikoreduktion}
-
+Die Bereitstellung der Unterstützung bestimmter Arten von Änderungen durch die Architektur sollte nur mit ausreichender Sicherheit, dass diese auch eintreten.
 \paragraph{Folgenreduktion}
-
-
+Sollte auffallen, dass Änderungen, für die schon eine Eingebaute Unterstützung vorhanden ist, nie kommen, so sollte diese Unterstützung als Ballast betrachtet  und dementsprechend entfernt werden. \\
+(\cite{SSA:12}S.561)
 %%________________________________________________________________
 \section{Auswirkungen auf andere kritische Qualitätseigenschaften}
 
 \paragraph{Ursachen}
-
+Meistens sind Hochflexible Systeme Unperformant, besitzen eine hohe Komplexität und sind dementsprechend teuer in der Entwicklung.
 \paragraph{Folgen/Gefahren}
+Daher steht die Fokussierung auf Flexibilität häufig im direkten Widerspruch zu anderen Qualitätseigenschaften, wie z.B. die Performanz oder die Benutzbarkeit.\\
+Zusätzlich kommt es vor, dass durch die zu starke Fokussierung auf die Flexibilität durch Zeitdruck andere Qualitätseigenschaften vernachlässigt werden.
 
 \paragraph{Risikoreduktion}
-
+Es muss für ein Projekt eine passende Balance zwischen den verschiedenen Qualitätseigenschaften gefunden werden. Dafür ist ein Prozess der kontinuierlichen Beurteilung der Architektur hilfreich.\\
+(\cite{SSA:12}S.561-562)
 
 %%________________________________________________________________
 \section{Zu Starke Abhängigkeit von spezifischer Hard- oder Software}
@@ -142,29 +155,50 @@ LDA View [3] and ACDC View [39].
 \paragraph{Beispiele}
 
 \paragraph{Vorteile}
-
+Fremde Soft-/Hardware zu verwenden kann ggf. preiswerter sein als alles selbst zu entwickeln.
+Zudem sind dadurch kürzere Entwicklungszeiten möglich.
 \paragraph{Nachteile/Gefahren}
-
+Es kann sein, dass die verwendeten Komponenten nicht mehr verfügbar sind. Bei Hardware könnte es sein dass diese Kaputt geht und evtl. nicht mehr hergestellt wird und bei Software z.B. dass Verträge auslaufen.\\
+Es kann auch sein, dass irgendwann bestimmte Komponenten theoretisch  durch bessere oder preiswertere Komponenten ausgetauscht werden könnten, jedoch die eigene Software speziell auf die eine Komponente angepasst ist und somit diese Komponente faktisch nicht austauschbar ist.
 \paragraph{Risikoreduktion}
-
+\subparagraph{1.}
+Vor der Verwendung von spezifischer Hard- oder Software sollte vorher abgewogen werden, ob die Vorteile überwiegen.
+\subparagraph{2.}
+Sollte entschieden worden sein, dass die Vorteile überwiegen, gilt es die Roadmaps der Verkäufer, so wie die anderen Faktoren die das Leben der Komponenten beeinflussen, zu berücksichtigen. Also z.B. lieber zusätzliche Hardware zu kaufen, die als Ausfallersatz dient, sollte verwendete Hardware kaputt gehen.
+\subparagraph{3.}
+Die Auswirkungen durch Änderungen der spezifischen Komponenten sollte durch eine entsprechende Abstraktion der der Schnittstellen zu diesen erfolgen.
+(\cite{SSA:12}S.562)
 %%________________________________________________________________
-\section{Auswirkungen auf andere kritische Qualitätseigenschaften}
+\section{Verlorengegangene Entwicklungsumgebung}
 
 \paragraph{Ursachen}
+Die Entwicklungs- und Testumgebungen gehen leichter verloren, als die Deploymentumgebung.
+Zusätzlich unterliegen Entwicklungsumgebungen einer von der Deploymentumgebung unabhängigen Evolution, da sich Entwicklungs- und Supportprioritäten sowie Arbeitspensum  sich über Zeit ändern.
 
 \paragraph{Folgen/Gefahren}
+Soll nun ein bestimmter Stand einer Entwicklungs- oder Testumgebungen wiederhergestellt werden, fehlt häufig dass wissen darüber, was alles benötigt wird und was zu tun ist.
 
 \paragraph{Benötigtes Wissen bei der Wiederherstellung}
+Um eine Entsprechende Enticklungsumgebung wiederherzustellen müssen folgende Fragen beantwortet werden können.\\
+Wird eine Spezielle Version einer Library benötigt? Oder funktioniert eine neuere Version auch?\\
+Welche Werkzeuge (mit welchen Versionen?) werden für den kompletten Build- und Releaseprozess benötigt?
+Sind spezielle Skripte im Einsatz? Werden dafür irgendwelche Erweiterungen benötigt?\\
+Benötigen die verwendeten Entwicklungswerkzeuge spezielle Patches? \\
+Wird eine Bestimmte OS version benötigt? oder Bestimmtes Model von Hardwarekomponenten? Oder sind diese durch neuere Versionen ersetzbar?\\
 
 \paragraph{Risikoreduktion}
+Zunächst sollte der Name, die Version, der Ursprung und der Grund, für die Einführung, bei der Einführung externer Elemente in die Entwicklungsumgebung dokumentiert werden. Als informelles Textdatei innerhalb des verwendeten Konfigurationsmanagementsystems sollte ausreichen.\\
+Um zu vermeiden, dass die so gesammelten Informationen unvollständig sind, sollte am Ende der Konstruktionsphase die Entwicklungsumgebung woanders nur mit den gesammelten Informationen erneut Aufgesetzt und getestet werden. Dabei fällt auf ob noch was vergessen wurde. Sollte dabei auffallen, dass was vergessen wurde sollte dies mit aufgenommen werden und dann erneut aufgesetzt und getestet werden. So wird erspart, dass die Lücken erst auffallen, wenn das Wissen darüber bereits vergessen wurde.\\
+Wenn möglich ist es sinnvoll Hardware Virtualisierungstechniken zu verwenden um die Umgebung zu erhalten.\\
+Sollten Kritische oder nur schwer zu beschaffende Hardwarekomponenten verwendet werden, ist es außerdem noch sinnvoll von denen Ersatzteile zu besitzen.\\
+(\cite{SSA:12}S.562-563)
 
 %%________________________________________________________________
 \section{Ad	Hoc Release Management}
-
-\paragraph{Ursachen}
-
-\paragraph{Folgen/Gefahren}
+Das Deployen in eine Testumgebung birgt normalerweise kein Risiko. Sollten dabei Fehler auftreten, so können diese in Ruhe behoben und dann nochmals deployt werden, ohne das Benutzer betroffen sind.\\
+Wenn jedoch Fehler beim Deployen in eine Produktivumgebung entstehen, können diese von nervig für Benutzer und Admins bis hin zu einer Gefährdung der kritischen Operationen der Zielorganisation werden.
+Daher wird ein Releasemanagement benötigt.
 
 \paragraph{Risikoreduktion}
-
+Der Release-Prozess sollte soweit wie möglich automatisiert werden. Dies erhöht die Zuverlässigkeit und Wiederholbarkeit. Sobald der Release-Prozess einmal automatisiert wurde, sinkt der Aufwand bei weiteren Releases. Zusätzlich verringert dies die Menschlichen Fehler, die während des Release-Prozess auftreten.
 
