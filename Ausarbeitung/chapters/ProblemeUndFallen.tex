@@ -74,17 +74,22 @@ Der Weaver vergleicht die Informationen aus dem Adapter mit denen des bestehende
 
 \subparagraph{Erweitrung um Atomaritäts Concern}
 
-
+\newpage
 %%________________________________________________________________
-\section{Undokumentiert Architekturen}
+\section{Undokumentierte Architekturen}
+In vielen Softwareprojekten gibt es keine Architekturdokumentationen. Auffällig ist, das viele OpneSource-Projekte die Architektur nicht dokumentieren.(\cite{Role}S.1)\\
+Dies verstößt gegen den Concern Erhaltung von Wissen \ref{Wissen}.
 
 \paragraph{Ursachen}
-
+Mögliche Ursachen könnten wohl sein, dass sich keine Gedanken über die Architektur gemacht wurden und \glqq einfach drauf los programmiert wird \grqq oder dass wenn sich Gedanken gemacht wurden Diese nicht dokumentiert werden da die geplante Architektur im Team als \glqq Selbsverständlich \grqq selbstverständlich gilt. (Habe beides in verschiedenen Projekten miterlebt.)
+  
 \paragraph{Folgen}
+Im Laufe der Zeit geht das Wissen über die Architektur verloren, falls es überhaupt vorhanden war. Daraus resultiert dann das Projekt im Laufe der Zeit komplexer wird, ohne dass eine Übersicht über die Architektur existiert und die Software somit schlecht zu warten oder erweitern ist.
 
 \paragraph{Folgenreduktion}
-
-
+Im laufe der Zeit wurden Verschiedene Techniken zum Reverseengineering der Architektur erarbeitet.\cite{Role}
+Beispiele dafür wären: Package View, Bunch View \cite{otam}, ArchDRH View \cite{ldrt},
+LDA View [3] and ACDC View [39].
 %%________________________________________________________________
 \section{Nicht Gewartete Architekturen/Architekurmodell Anders Als Implementierung}
 
