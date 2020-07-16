@@ -158,7 +158,7 @@ SAP und SDP zusammengenommen ergeben das DIP auf Komponentenebene. Der wesentlic
 Der Grad der Abstraktion einer Komponente $A \in [0.1]$ lässt sich genau wie Instabilität als Softwaremetrik messen mittels der in \ref{eq2} angegebenen Formel (\cite{CA:18}, S.144), wobei 1 für maximal abstrakt steht.
 \begin{equation}
 \label{eq2}
-A=\frac{\#\, abstrakte\,Klassen\,oder\,Schnittstellen}{\#\, Gesamtzahl\,Klassen}
+A=\frac{\#\, abstrakte\,Klassen\,und\,Schnittstellen}{\#\, Gesamtzahl\,Klassen}
 \end{equation}
 
 
@@ -170,7 +170,7 @@ Es exisitiert eine breite Auswahl solcher Patterns. Im Folgenden werden zwei Bei
 
 \subsection{Abstract Factory}
 Das DIP (siehe Abschnitt \ref{dip}) bedingt, dass konkrete, flüchtige Objekte nicht ohne Weiteres erzeugt werden können, denn jede Objekterzeugung stellt eine Abhängigkeit zu einer konkreten Klasse des Objektes dar (\cite{CA:18}, S.109). 
-Abhilfe schafft das Design-Pattern Abstract Factory. Dieses Pattern erlaubt es, Familien verwandter Objekte zu erzeugen, ohne deren konkrete Klassen zu spezifizieren (\cite{pat}, S.90). \\
+Abhilfe schafft das Design-Pattern Abstract Factory. Dieses Pattern erlaubt es, \glqq Familien verwandter Objekte zu erzeugen, ohne deren konkrete Klassen zu spezifizieren\grqq (\cite{pat}, S.90, Z.2-4, eigene Überetzung). \\
 In Abbildung \ref{fig:fact} ist das Pattern am Beispiel einer plattformübergreifenden grafischen Anwendung gezeigt. In der Mitte befindet sich das Interface \textit{GUIFactory}, dies ist die Abstract Factory. Hier werden Methoden für die konkreten Factories vorgegeben. \textit{Windows Factory} und \textit{MacFactory} sind die konkreten Factories, sie implementieren die Methoden der Abstract Factory. Das Interface \textit{Checkbox }stellt ein abstraktes Produkt dar, das von den konkreten Produkten \textit{WindowsCheckbox} und \textit{MacCheckbox} implementiert wird, analog verhält es sich mit dem Interface \textit{Button} (\cite{pat}, S.96). \\
 Der erste Vorteil besteht in der Konsistenz der Produkte: Die \textit{WindowsFactory} stellt nur zueinander passende Windows UI-Elemente her, analog bei der \textit{MacFactory}. Das Pattern lässt sich beispielsweise um eine Linux-Factory erweitern, die konsistente Linux UI-Elemente enthält. \\
 Der zweite Vorteil besteht darin, dass die Anwendung lediglich von \textit{GUIFactory} abhängig ist, d.h. von einer Abstraktion, was dem DIP entspricht. \\
@@ -222,7 +222,7 @@ Nicht alle Metasysteme sind gleich so komplex, dass sie sich aus mehreren Enterp
 \section{Variation Points}
 Diese Architekturtaktik besteht darin, Variation Points zu verwenden. 
 Dies sind lokale Design-Lösungen, um bestimmte Änderungen an bestimmten Stellen im System zu unterstützen. Hierbei müssen die Stellen, an denen Variation Points erforderlich sind, identifiziert werden. (\cite{SSA:12}, S.556). \\
-Zunächst werden allgemeine Vorgehensweisen erläutert, worauf im zweiten Abschnitt konkrete Design-Patterns folgen, mit denen sich Variability realsieren lässt. 
+Zunächst werden allgemeine Vorgehensweisen erläutert, worauf im zweiten Abschnitt konkrete Design-Patterns folgen, mit denen sich Variabilität realsieren lässt. 
 
 \subsection{Vorgehensweisen} 
 Ein mögliches Vorgehen besteht darin, Elemente austauchbar zu gestalten.
@@ -236,10 +236,10 @@ Zudem sollten größere Prozesse stets in Teilschritte unterteilt werden. Dies bie
 
 
 \subsection{Beispiele}
-In diesem Abschnitt werden Design-Patterns vorgestellt, die Variability ermöglichen. 
+In diesem Abschnitt werden Design-Patterns vorgestellt, die Variabilitätermöglichen. 
 
 \subsubsection{Facade}
-Dieses Pattern bietet Variability bei der Verwendung von Biblithoken, Frameworks oder einer anderen komplexen Menge an Klassen, indem 
+Dieses Pattern bietet Variabilität bei der Verwendung von Biblithoken, Frameworks oder einer anderen komplexen Menge an Klassen, indem 
 es eine vereinfachte Schnittstelle zu jenen Elementen zur Verfügung stellt (\cite{pat}, S.210). Diese Schnittstelle enthält nur die Methoden, die wirklich benötigt werden. Damit ist das System nicht mehr so stark an die externe Bibliothek, das Framework etc. gekoppelt und Änderungen daran, die zu erwarten sind, wirken sich weniger stark aus (\cite{pat}, S.211). Upgrades zu neueren Versionen oder das Austauschen der Software hinter der Schnittstelle stellen mit diesem Design-Pattern kein Problem mehr dar (\cite{pat}, S.214). 
 
 \subsubsection{Template Method}
@@ -262,7 +262,7 @@ Beispielsweise ist in einer Data-Mining-Anwendung Variabilität bezüglich des Dat
 % Facet Classifications
  
 \subsubsection{Weitere Patterns}
- Weitere Patterns, die Variability erlauben, sind Bridge (\cite{pat}, S.163-177), Chain of Responsibility (\cite{pat}, S.250-267) sowie das Visitor Pattern (\cite{pat}, S.393-408).
+ Weitere Patterns, die Variabilität erlauben, sind Bridge (\cite{pat}, S.163-177), Chain of Responsibility (\cite{pat}, S.250-267) sowie das Visitor Pattern (\cite{pat}, S.393-408).
 
 
 \section{Extension Points}
