@@ -1,0 +1,90 @@
+\chapter{Studie: Einfluss der Softwarearchitektur auf die Evolution}
+
+Da es interessant ist, den Einfluss der Softwarearchitektur, auf die Evolution, beziehungsweise die Anpassbarkeit von Software zu untersuchen, befasst sich der folgende Abschnitt mit einer Studie zu diesem Thema. \\
+Der Beitrag dieses Papers ist in zweifacher Hinsicht interessant. Einmal macht es empirisch deutlich, wie wichtig es ist, Studien hinsichtlich des Einflusses der Softwarearchitektur auf die Evolution durchzuführen, da es weitestgehend noch nicht untersucht wurde, inwiefern Änderungen einen Einfluss auf die Softwarequalität besitzen. Zusätzlich wurden zwei neue Messwerte herausgearbeitet, um den Unterschied zwischen modulinternen und modulübergreifenden Änderungen zu quantifizieren (\cite{kour}, S. 247). Eine weitere Errungenschaft dieser Studie ist, dass sie zeigt, dass die Anwendung der empirischen Methode auf reale Daten und Open Source Softwaresysteme zeigt, dass modulübergreifende Änderungen eher fehlerbehaftet sind, als modulinterne Änderungen (\cite{kour}, S. 247).
+
+\section{Überblick}
+Obwohl es bekannt ist, dass die Softwarearchitektur einen signifikanten Einfluss auf die Evolution hat, war es bisher schwierig, Untersuchung bezüglich eines Einflusses der Softwarearchitektur auf die Evolution durchzuführen, da die Softwarearchitektur in Open Source Projekten oft nicht dokumentiert ist. Die 2015 herausgebrachte Studie, auf die sich in diesem Kapitel bezogen wird, nutzt bestimmte Programme, beziehungsweise Methoden, um die Architektur von Software herauszuarbeiten. Ebenfalls versucht sie das Problem des Dokumentierens mit dem sogenannten \glqq Surrogate Architectural Views\grqq Konzept zu beheben (\cite{kour}, S. 247). Diese Herangehensweise ist demnach neu und hebt sich von vorherigen Studien ab (\cite{kour}, S. 246). \\
+Ein Fokus der Studie liegt darauf, zu untersuchen, ob modulübergreifende Änderungen einen anderen Einfluss auf die Softwarequalität besitzen als modulinterne Änderungen (\cite{kour}, S. 246). 
+Die Studie macht ebenfalls deutlich, dass nicht alle Änderungen den gleichen Effekt haben. Das liegt daran, dass ein Modul eine limitierte Anzahl von Belangen besitzt, weshalb Änderungen, die mehrere Module besitzen, auch mehrere Belange bedienen müssen (\cite{kour}, S. 246). Hinzukommt, dass die Entwickler von großen Softwaresystemen immer nur mit einer kleinen Anzahl von Modulen vertraut sind, weshalb es für den Entwickler umso schwieriger ist, die Konsequenzen einer Änderung zu verstehen, umso mehr Module sie betrifft (\cite{kour}, S. 246).\\
+Im Folgenden werden das methodische Vorgehen, sowie verschiedene Perspektiven der Softwarearchitektur im Mittelpunkt der Betrachtungen stehen. Außerdem wird ein kurzer Blick auf die Ausführung der Studie geworfen. \\
+Drei Forschungsfragen werden diese Ausarbeitung begleiten, die innerhalb der Studie als zentral dargestellt werden. \\
+Zum Schluss werden eine kurze Darstellung der Ergebnisse, eine Diskussion, sowie eine Zusammenfassung erfolgen. 
+
+\section{Das methodische Vorgehen in der Studie}
+Die Methodik der empirischen Studie setzt sich aus vier Komponenten zusammen, repräsentiert durch die Vierecke in der folgenden Grafik (\cite{kour}, S. 248). \\
+
+ \begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=1\textwidth]{images/exp.png}
+	\caption{Aufbau des Experiments (Abb. aus \cite{kour}, S. 248, Fig.1)}
+	\label{fig:exp}
+\end{figure}
+
+
+Bei der ersten Komponente handelt es sich um einen Änderungsextraktor (\glqq \textit{Co-change Extractor}\grqq). Dieser sucht Quellencode repositories, und ruft die Dateigruppen auf, welche zusammen geändert wurden (\cite{kour}, S. 248). Er besitzt ein modulares Design und kann erweitert werden, um auch andere repositories zu unterstützen (\cite{kour}, S. 248).  \\
+Die zweite Komponente, genannt \glqq \textit{Defect Extractor}\grqq analysiert die \textit{commit logs} der Projekte und identifiziert die Softwareänderungen, welche Fehler in das System einführen (\cite{kour}, S. 248). Diese beiden ersten Komponenten sind miteinander synchronisiert, um Daten zu sammeln und zu implementieren.\\
+Bei der dritten Komponente handelt es sich um den \glqq \textit{Architectural Explorer}\grqq, welcher die Effekte von Änderungen auf die Ausbreitung von Fehlern innerhalb des Systems untersucht (\cite{kour}, S. 248). Sie nutzen verschiedene reverse engineering Taktiken und erstellen so einige \glqq \textit{Surrogate Views}\grqq, welche die Architektur des Systems approximieren (\cite{kour}, S. 248). \\
+Die letzte Komponente ist die sogenannte \glqq\textit{ Hypothesis Testing}\grqq Komponente. Dort lassen sich die Effekte von Änderungen auf die Ausbreitung von Fehlern aus der Architekturperspektive betrachten (\cite{kour}, S. 248). \\
+
+Innerhalb dieses Kapitels und der Studie spielen folgende drei Forschungsfragen eine elementare Rolle:
+\begin{itemize}
+		\item Frage 1: Sind modulübergreifende Änderungen fehleranfälliger als modulinterne Änderungen?
+		\item Frage 2: Ergeben verschiedene Surrogates für die \glqq Module View\grqq unterschiedliche Ergebnisse für die Beziehung zwischen Änderungsverteilung und Defekten? Und falls ja, welches Surrogate liefert die besten Schätzungen für Softwarefehler?
+		\item Frage 3: Hat eine Metrik, die die modulübergreifenden Änderungen berücksichtigt eine höhere Korrelation mit Fehlern als eine Metrik, die die Softwarearchitektur nicht berücksichtigt? (\cite{kour}, S. 248)
+\end{itemize}
+Diese werden bei der Zusammenfassung der Ergebnisse beantwortet werden. 
+
+\section{Die Architektur aus verschiedenen Perspektiven}
+Dieses Teilkapitel befasst sich mit den Darstellungen der Architektur, die in dieser Studie genutzt wurden. Um die Architektur von komplexen Systemen zu verstehen, ist es wichtig, diese aus verschiedenen Perspektiven zu betrachten (\cite{kour}, S. 248). Im Englischen wird dies als \glqq architectural views\grqq bezeichnet. Jede davon behandelt einen anderen Belang. 
+Es gibt drei verbreitete Perspektiven, die die Architektur eines Systems repräsentieren.
+Die erste wird \glqq Module View\grqq genannt, welche Einheiten der Implementation aufzeigt (\cite{kour}, S. 248).\\
+Die zweite Perspektive wird als \glqq Component-and-Connector View\grqq bezeichnet. Diese Per-spektive repräsentiert eine Menge an Modulen, die ein Laufzeitverhalten besitzen (\cite{kour}, S. 248).\\
+Bei der dritten Perspektive handelt es sich um die sogenannte \glqq Allocation View\grqq, welche die Beziehung zwischen Software, Benutzer (zum Beispiel ein Team von Entwicklern) und Hardware aufzeigt (\cite{kour}, S. 248).\\
+In der hier dargestellten Studie steht die \glqq Module View\grqq im Vordergrund, da sich diese Studie mit dem Aufbau und der Evolution von Software beschäftigt und nicht mit deren Laufzeit, beziehungsweise Deployment Charakteristiken (\cite{kour}, S. 249).
+
+\section{Ausführung der Analyse}
+Die folgende Darstellung wird sich damit beschäftigen, wie es möglich war, die Analyse durchzuführen. \\
+Bei der Studie handelt es sich um sieben Projekte, aus verschiedenen Domänen, welche in der folgenden Tabelle aufgeführt sind:
+
+ \begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=1.2\textwidth]{images/table.png}
+	\caption{Untersuchte Projekte (Abb. aus \cite{kour}, S. 251, Table 1)}
+	\label{fig:table}
+\end{figure}
+
+Eine Analyse ist nur möglich, wenn Daten zur Verfügung stehen. Dafür wurden gleiche Zeiträume betrachtet und Änderungen und bug fixes analysiert, um dann die Ergebnisse miteinander zu vergleichen (\cite{kour}, S. 251). Bei den Ergebnissen des hier zitierten Papers handelt es sich um Daten aus dreimonatigen Intervallen.
+
+\section{Zusammenfassung der Ergebnisse der Studie}
+Wie bereits dargestellt, handelte es sich bei der aufgeführten Studie um eine empirische Analyse von Daten. \\
+Bei der Zusammenfassung der Ergebnisse werden die drei zuvor aufgestellten Forschungsfragen aufgegriffen und mithilfe der Ergebnisse beantwortet. 
+
+\subsection{Forschungsfrage 1}
+Folgende Tabelle fasst die fünf Modelle \textit{Bunch, ArchDRH, ACDC, Package }und \textit{LDA view} zusammen, die sich auf die erste Forschungsfrage beziehen (\cite{kour}, S. 252).
+
+ \begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=1.2\textwidth]{images/table2.png}
+	\caption{Ergebnisse der verschiedenen Views (Abb. aus \cite{kour}, S. 252, Table 2)}
+	\label{fig:table2}
+\end{figure}
+
+Da es keinen Zugang zu dem Quellcode des kommerziellen Projektes gibt, können die Daten des \glqq \textit{LDA view}\grqq nicht aufgeführt werden (\cite{kour}, S. 252).
+Die Daten zeigen, dass die aufgestellte Proposition - dass modulübergreifende Änderungen fehleranfälliger sind, als modulinterne Änderungen - bestätigt werden kann (\cite{kour}, S. 252). Somit lässt sich Frage 1 mit zutreffend beantworten. Zusätzlich konnten keine Unterschiede zwischen Open Source Projekten und kommerziellen Projekten festgestellt werden (\cite{kour}, S. 252).
+
+\subsection{Forschungsfrage 2}
+Alle Projekte, die in der Studie untersucht wurden, zeigen, dass modulübergreifende Änderungen einen stärkeren Einfluss auf \textit{bugs} haben, als Änderungen, die innerhalb eines Moduls stattfinden (\cite{kour}, S. 252). Es lässt sich anhand der Daten ebenfalls feststellen, dass Entwickler alle verfügbaren \glqq \textit{surrogate views}\grqq, außer die \textit{high-level packages}, nutzen können, um die Änderungen innerhalb des Systems zu überwachsen (\cite{kour}, S. 253). Im Endeffekt bedeutet dies, dass man sogar \textit{low-level packages }nutzen kann, um die Gesundheit des Systems und deren Änderungshistorie zu überwachen, anstatt komplexe Methoden anzuwenden. Zusammenfassend lässt sich deshalb die zweite Forschungsfrage damit beantworten, dass keine \textit{surrogate view} besser als eine andere ist, ausgenommen ist die\textit{ high-level package view}, da sie gleiche Resultate bezüglich des Verhältnisses zwischen Änderungsverteilung und Fehlern aufzeigen (\cite{kour}, S. 253).
+
+\subsection{Forschungsfrage 3}
+Die Studie hat herausgefunden, dass die Dimension der Änderung (zum Beispiel modulübergreifende versus modulinterne Änderungen) wichtiger ist als der Aufwand der Änderung (\cite{kour}, S. 253). Weiterhin zeigt die Studie, dass wenn man eine Metrik benutzt, die modulübergreifende Änderungen differenziert, es zu Verbesserungen führt\textit{ bugs} fehlerfrei vorherzusagen (\cite{kour}, S. 253). Abschließend lässt sich Forschungsfrage drei dahingehend beantworten, dass eine Änderungsmetrik, die Architekturmodule berücksichtigt, höhere Korrelationen mit Fehlern aufweist als eine, die keine modulübergreifenden Änderungen differenziert (\cite{kour}, S. 253).
+\section{Diskussion}
+Wie eingangs erwähnt, ist es bereits bekannt, dass die Softwarearchitektur eine wichtige Rolle in Bezug auf die Evolution spielt, besonders in Bezug auf die Änderungen, die innerhalb des Systems vollzogen werden können (\cite{kour}, S. 253). Die Studie hat empirische Belege herausgefunden, die die Wichtigkeit der Softwarearchitektur in der Evolution eines Softwaresystems beweisen. Wie bereits erwähnt, kennen sich die Entwickler meist nur mit einem kleinen Teil der Module aus, gerade wenn es sich um ein großes Softwaresystem handelt. So ist es für den Entwickler noch schwieriger, die Konsequenzen der Änderungen und das Verhalten des Systems zu verstehen, weshalb es wahrscheinlicher ist, bei modulübergreifenden Änderungen Fehler zu machen (\cite{kour}, S. 254).
+Die Studie bekräftigt zusätzlich die gängige Meinung, dass die Entscheidungen der Softwarearchitektur (zum Beispiel wie sich ein Softwaresystem in seine Module zerlegen lässt) einen signifikanten Einfluss auf die Evolution des Systems hat (\cite{kour}, S. 254). So wird auch der Einfluss von Softwarearchitektur auf Open Source Projekte deutlich. Die Studie zeigt demnach auf, wie wichtig es wäre, dass auch die Open Source Entwickler die Softwarearchitektur dokumentieren (\cite{kour}, S. 254).
+Interessant für zukünftige Studien wäre es, die Programmiersprache von Java in eine andere zu wechseln, wie zum Beispiel C++, allerdings müsste dann der Begriff \textit{package view} umdefiniert werden, der ausschließlich in dieser Studie für Java definiert worden ist, allerdings ist es möglich ähnliche Konzepte für diesen Begriff in anderen Programmiersprachen zu definieren  (\cite{kour}, S. 255).
+
+\section{Zusammenfassung der Studie}
+Abschließend lässt sich zu dieser Studie sagen, dass sie die Wichtigkeit der Softwarearchitektur, in Bezug auf Design und Wartung von Software herausgearbeitet hat (\cite{kour}, S. 255). Jedoch gerät dies in der Praxis, vor allem durch die\textit{ Open Source community}, oftmals in Vergessenheit. Diese nutzen nicht die Vorteile von Softwarearchitekturprinzipien, die das System zusammenhalten. Auch wenn sie nicht explizit diese Prinzipien vermeiden, stehen diese nicht im Vordergrund und werden während der Systemevolution weder repräsentiert, noch aufrechterhalten (\cite{kour}, S. 255). Die Studie zeigt empirisch, wie sich das Benutzen einer Softwarearchitektur während der Evolution auf die Qualität der Software im Ganzen auswirkt. Herausgefunden wurde, dass Änderungen, die modulübergreifend sind, fehleranfälliger sind als jene, die lediglich modulintern vollzogen werden (\cite{kour}, S. 255). Dies gilt sowohl für kommerzielle Projekte als auch für Open Source Projekte mit dokumentierten Softwarearchitekturen. Die Studie bekräftigt, die Wichtigkeit der Berücksichtigung einer Softwarearchitektur, da sie als eine der Schlüsselfaktoren, bezogen auf die Qualität für das Verändern von Softwaresystemen, gilt (\cite{kour}, S. 255). 
+
+
+
