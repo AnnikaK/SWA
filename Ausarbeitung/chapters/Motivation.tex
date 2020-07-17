@@ -18,7 +18,7 @@ Hierunter fallen z.B. langlebige Systeme, welche einem kontinuierlichen Prozess 
 Es ist wichtig, die erwarteten Änderungen hierauf zu analysieren und einzuordnen, da große Kosten entstehen, wenn nur kleinere Änderungen erwartet werden, jedoch später große Änderungen benötigt werden. Teilweise ist in solch einer Situation die Neuentwicklung die einzige praktikable Lösung. (\cite{SSA:12}, S.545)\\
 
 \subsection{Dimensionen von Änderungen}
-Es gibt verschiedene Arten von Änderungen. Diese verschiedenen Arten benötigen unterschiedliche Unterstützung(smöglichkeiten) durch die Architektur. Daher ist es wichtig zu erkennen, um welche Art es sich bei erwarteten Änderungen handelt, sodass diese unterstützt werden.
+Es gibt verschiedene Arten von Änderungen. Diese verschiedenen Arten benötigen unterschiedliche Unterstützungsmöglichkeiten durch die Architektur. Daher ist es wichtig zu erkennen, um welche Art es sich bei erwarteten Änderungen handelt, sodass diese unterstützt werden kann.
 Im Buch \glqq Software Systems Architecture\grqq (\cite{SSA:12}, S.546) von Nick Rozanski und Eoin Woods wurden folgende Arten als Dimensionen von Änderungen (Dimensions of Change) herausgearbeitet:
 
 \paragraph{Funktionale Evolution}
@@ -34,30 +34,30 @@ Da viele Softwaresysteme nicht alleine arbeiten, sondern nur im Zusammenwirken m
 \paragraph{Wachstum}
 Viele erfolgreiche Systeme wachsen mit der Zeit. Dies kann Einfluss auf die  Evolution nehmen. So kann sich durch das Wachstum des Systemes  die Anzahl der Transaktionen so wie deren Komplexität stark erhöhen oder es gibt mehr Benutzer und Daten. Daher muss ggf. das System daraufhin angepasst werden.\\
 Besonders bei Systemen mit Internetanbindung kann dies sehr beträchtlich und unvorhersehbar werden.
-So gibt es hier z.B. die Abwägung zu viel Geld für einen Server auszugeben, für die Eventualität, dass das System schnell erfolgreich wird oder lieber weniger Geld für den Server mit der Gefahr, dass das System durch zu viele Anfragen überlastet wird.
+So gibt es hier z.B. die Abwägung zwischen viel Geld für einen Server auszugeben, für die Eventualität, dass das System schnell erfolgreich wird, was evtl. gar nicht eintrifft und somit viel zu teuer ist, oder lieber weniger Geld für den Server ausgeben, mit der Gefahr, dass das System durch zu viele Anfragen überlastet wird.
 In den Vorträgen zum Architekturstil Microservices wurden Ansätze zu dynamischer Serverskalierung AWS (Amazon Web Services) vorgestellt.
   
 \subsection{Wahrscheinlichkeit und Zeit von Änderungen}
 
 
 \paragraph{Second-system effect}
-In der Praxis der Softwareentwicklung ist der sogenannte \glqq Second-system effect\grqq häufig zu finden. Dieser beschreibt, dass zunächst ein einfaches System gebaut wird. Soll das erste System abgelöst werden, tendiert das zweite System dazu, dass es übergenerisch und dadurch sehr komplex entwickelt wird.\cite{SSE:00}
+In der Praxis der Softwareentwicklung ist der sogenannte \glqq Second-system effect\grqq  häufig zu finden. Dieser beschreibt, dass zunächst ein einfaches System gebaut wird. Soll das erste System abgelöst werden, tendiert das zweite System dazu, dass es übergenerisch und dadurch sehr komplex entwickelt wird.\cite{SSE:00}
 
 \paragraph{Unnütze Komplexität vs. komplizierte Änderungen/Zeitpunkt des Kostenanfalls}\label{komplex}
-Anhand des Second-system effects lassen sich zwei Strategien für den Kostenanfall von Änderungen erkennen. Der eine Ansatz ist, dass das System möglichst \glqq einfach\grqq gestaltet wird: Anforderungen werden, dann wenn sie kommen, so einfach wie möglich umgesetzt (vgl. erstes System). Dieser Ansatz hat den Effekt, dass wenn später Änderungen hinzukommen, es schwierig wird diese einzubauen, da die Möglichkeit dafür in der Architektur nicht vorgesehen ist. \\
-Also ein später Zeitpunkt für den Anfall der Kosten einer Änderung. Hierbei kann es sogar so kompliziert werden diese Änderungen einzubauen, dass sich die Neuentwicklung des Systemes mehr anbietet.\\
-Der andere Ansatz ist, die Software so zu strukturieren, dass Änderungen möglichst einfach einzubauen sind. Dies wäre beim \glqq Second-system effect\grqq das zweite System. Eine Software-Architektur, die möglichst viele Änderungen unterstützt, ist an und für sich meist sehr komplex damit zunächst teuer in der Entwicklung, bevor konkrete Funktionen vorhanden sind. Außerdem sind solche Systeme aufgrund ihrer Komplexität schwer zu verstehen und aufwändiger zu testen.\\
+Anhand des Second-system effects lassen sich zwei Strategien für den Zeitpunkt des Kostenanfalls von Änderungen erkennen. Der eine Ansatz ist, dass das System möglichst \glqq einfach\grqq gestaltet wird: Anforderungen werden, dann wenn sie kommen, so einfach wie möglich umgesetzt (vgl. erstes System). Dieser Ansatz hat den Effekt, dass wenn später Änderungen hinzukommen, es schwierig wird diese einzubauen, da die Möglichkeit dafür in der Architektur nicht vorgesehen ist. \\
+Also ein später Zeitpunkt für den Anfall der Kosten einer Änderung. Hierbei kann es sogar so kompliziert werden diese Änderungen einzubauen, dass die Neuentwicklung des Systemes insgesamt kostengünstiger ist.\\
+Der andere Ansatz ist, die Software so zu strukturieren, dass Änderungen möglichst einfach einzubauen sind. Dies wäre beim \glqq Second-system effect\grqq das zweite System. Eine Software-Architektur, die möglichst viele Änderungen unterstützt, ist an und für sich meist sehr komplex, damit zunächst teuer in der Entwicklung, bevor konkrete Funktionen vorhanden sind. Außerdem sind solche Systeme aufgrund ihrer Komplexität schwer zu verstehen und meist aufwändiger zu testen.\\
 Hier ist der Zeitpunkt des Kostenanfalls für die Änderungen früh in der Entwicklung, da die Änderungen später einfach einzubauen sind.\\
-Insgesamt gilt es eine sinnvolle Abwägung zwischen diesen beiden Extremen zu finden, um Entwicklungskosten und -zeit zu minimieren.(\cite{SSA:12}, S.547)\\
+Insgesamt gilt es eine sinnvolle Abwägung zwischen diesen beiden Extremen zu finden, um Entwicklungskosten und -zeit zu minimieren.\\(\cite{SSA:12}, S.547)\\
 
 \paragraph{Zeitraum von Änderungen}
 Je später eine erwartete Änderung erwartet wird, desto wahrscheinlicher ändert sich die erwartete Änderung bzw. fällt ggf. komplett weg.\\
-Daher gilt es Unterstützungsmöglichkeiten für näherliegende Änderungen zu priorisieren.(\cite{SSA:12}, S.547)
-
+Daher gilt es Unterstützungsmöglichkeiten für näherliegende Änderungen zu priorisieren.
+\\(\cite{SSA:12}, S.547)
 \paragraph{Wahrscheinlichkeit von Änderungen}
 Mögliche Änderungen sind häufig einfach identifizierbar. Jedoch erhöht das Bereitstellen von Änderungsmöglichkeiten die Komplexität.
-Also sollten nur Möglichkeiten für wahrscheinliche Änderungen eingebaut werden.\\
-\\
+Also sollten nur Möglichkeiten für wahrscheinliche Änderungen eingebaut werden.
+\\(\cite{SSA:12}, S.547)
 \\
 Die entsprechenden Analyseverfahren werden im Kapitel Aktivitäten im Abschnitt Analyse besprochen.
 
@@ -90,9 +90,9 @@ Auf die anderen Views hat die Evolutionsperspektive keinen (größeren) Einfluss.\
 Das Produktmanagement hat verschiedene Aufgaben. Es muss die Anwender- und Kundenbedürfnisse verstehen. Des weiteren  muss es die Bedrohungen und Möglichkeiten des Marktes erkennen. Darauf basierend sollte das Produktmanagement die Roadmap für die zukünftige Entwicklung erstellen.\\
 Dafür muss das Produktmanagement eng mit der Entwicklungsorganisation zum Liefern und Weiterentwickeln des entsprechenden Produktes zusammenarbeiten.\\
 In verschiedenen agilen Softwareentwicklungsmethoden wird aufgrund der Wichtigkeit des Produktmanagements diese Rolle direkt in der Entwicklungsmethode eingebaut. So gibt es z.B. bei Scrum die Rolle des Product Owners, welche genau diese Aufgaben hat.\\
-Bezogen auf die Evolutionsperspektive liefert das Produktmanagement folgende Eigenschaften der Änderungen:\\
+Bezogen auf die Evolutionsperspektive liefert das Produktmanagement folgende Eigenschaften der Änderungen:
 Den Kontext und die Richtung der Änderungen des Systemes.\\
-Dies hilft dann beim systematischem Priorisieren von möglichen Änderungen. Außerdem erleichtert es durch die Berücksichtigung der Roadmap die Vermeidung von inkohärenten Feature-Mengen. \\
+Dies hilft dann beim systematischem Priorisieren von möglichen Änderungen. Außerdem erleichtert es, durch die Berücksichtigung der Roadmap, die Vermeidung von inkohärenten Feature-Mengen. \\
 (\cite{SSA:12}, S.545)
 
  
@@ -111,11 +111,11 @@ Einige Beispiele dafür könnten sein:\\
 
 
 \paragraph{Entwicklungskomplexität}
-Wie bereits in \ref{komplex} besprochen, ist eine Architektur, welche die Evolution unterstützt, häufig komplexer, als solche die nicht. Zudem sind die Kosten und die Entwicklungszeit für die erste Version meist teurer. Es kann sogar sein, dass diese erhöhte Komplexität bestimmte Änderungen erschwert.
+Wie bereits in \ref{komplex} besprochen, ist eine Architektur, welche die Evolution unterstützt, häufig komplexer, als solche die dies nicht unterstützen. Zudem sind die Kosten und die Entwicklungszeit für die erste Version meist teurer. Es kann sogar sein, dass diese erhöhte Komplexität bestimmte Änderungen erschwert.
 (\cite{SSA:12}, S.548) 
 
 \paragraph{Erhaltung von Wissen}\label{Wissen}
-Während der Entwicklung ist das Wissen meist vorhanden, das Personal nur für die Entwicklung eines Projektes beschäftigt, und Änderungen erwartet. Sobald es ausgeliefert ist, und in den späteren Lebenszyklusphasen, ist häufig das Ursprüngliche Personal mit anderen Projekten beschäftigt. Jedoch können auch hier Änderungen anfallen. Im Laufe der Zeit können sich die verfügbaren technischen Umgebungen ändern und Deteils vergessen werden. Daher ist es wichtig, dass für diese Änderungen, z.B. durch Wartung, das Wissen erhalten bleibt.\\
+Während der Entwicklung ist meist das Wissen noch vorhanden, das Personal nur mit die Entwicklung eines Projektes beschäftigt, und Änderungen erwartet. Sobald ein System ausgeliefert ist, und sich somit in den späteren Lebenszyklusphasen befindet, ist häufig das Ursprüngliche Personal mit anderen Projekten beschäftigt. Jedoch können auch hier Änderungen anfallen. Im Laufe der Zeit z.B. können sich die verfügbaren technischen Umgebungen ändern und Deteils vergessen werden. Daher ist es wichtig, dass für diese Änderungen, z.B. durch Wartung, das Wissen erhalten bleibt.\\
  (\cite{SSA:12},S.548) 
  
 \paragraph{Zuverlässigkeit von Änderungen}
