@@ -1,0 +1,191 @@
+\chapter{Aktivitäten}
+In diesem Abschnitt wird das iterative Vorgehen zur Anwendung der Evolutionsperspektive beschrieben. Hierbei werden die vier Schritte Anforderungen bestimmen, Aktuellen Stand der Evolution bestimmen, Tradeoffs der Evolution abwägen und Architekturtaktiken anwenden, erklärt (\cite{SSA:12}, S. 549 ff). Außerdem wird das systematische Vorgehen des AIM42 Ansatzes, zur Evolution von Software Systemen und Architekturen erläutert (\cite{aim24}). \\
+
+\section{Anwendung der Evolutionsperspektive}
+Schon während der Entwicklungsphase sollten alle Änderungen einer Software, die eventuell eintreffen könnten, erkannt und berücksichtigt werden. Dadurch kann spätere Entwicklungsarbeit für zum Beispiel das Hinzufügen neuer Funktionen, oder das Beheben von Fehlern, erheblich verkürzt werden. Gerade bei den heutzutage verbreiteten agilen Softwareentwurfsmodellen ist die Anpassbarkeit der Software enorm wichtig. Dabei bietet sich ein iteratives Vorgehen, bestehend aus vier Schritten, zum Umgang mit diesen Änderungen an  (\cite{SSA:12}, S. 544).
+
+\subsection{Anforderungen der Evolution bestimmen}
+ Im ersten Schritt der Anwendung der Evolutionsperspektive geht es darum die Anforderungen an die Software aus der Sicht der Evolutionsperspektive zu bestimmen. Dieser Schritt ist ein weiterer Teil der Anforderungsanalyse. Hat man sich bei der initialen Anforderungsanalyse darauf konzentriert, was das System am Ende liefern muss, so geht es nun darum zu bestimmen, wie sich das System in Zukunft ändern, beziehungsweise entwickeln könnte. Es geht darum, alle möglichen Arten von Anpassungen, neuen Funktionen, neuen Schnittstellen und so weiter zu bestimmen. Diese Änderungen werden in einfacher textueller, beziehungsweise tabellarischer Form, festgehalten und jeweils nach Dimension, Ausmaß, Wahrscheinlichkeit und Zeitpunkt der Änderungen eingeordnet (siehe \ref{einordnung}). \\
+Die Anforderungen, die an die Evolution der Software gestellt werden, sind meist nicht explizit in den zur Verfügung stehenden Dokumenten genannt. Aus diesem Grund muss man, um die Anforderungen zu bestimmen, die Anforderungsdokumente erneut lesen und sich darauf fokussieren, was zwischen den Zeilen steht. Hierbei kann man unter anderem nach folgenden Punkten suchen:
+
+\begin{itemize}
+	\item Aufgeschobene Funktionen, also Funktionen oder Erweiterungen, die erst zu einem späteren Zeitpunkt, beziehungsweise noch nicht bei Fertigstellung der Software, geliefert werden müssen. Im Gegensatz zu den nachfolgenden Punkten, stehen diese Änderungen explizit im Dokument.
+	\item Lückenhafte Anforderungen, sind Anforderungen an die Evolution, die bei der initialen Anforderungsanalyse nicht genauer definiert wurden, da diese unvollständig ausgeführt wurden.
+	\item Ungenaue oder undefinierte Anforderungen, sind Anforderungen die noch nicht, beziehungsweise nur ungenau definiert wurden. Diese deuten darauf hin, dass das System noch nicht richtig verstanden wurde. Befasst man sich genauer mit diesem Teil des Systems, werden dann eventuell neue Anforderungen, also Änderungen hinzukommen.
+	\item Anforderungen mit offenem Ende, also Anforderungen, die implizieren, dass Funktionen oder Erweiterungen, ähnlich zu den explizit definierten Anforderungen, benötigt werden.
+\end{itemize}
+
+Hat man alle Dokumente nochmals untersucht und darüber hinaus auch mit verschiedenen Steakholdern gesprochen, können die einzelnen Änderungen zu einer Liste zusammengefasst werden. Jede dieser Änderungen ist nach Dimension, Ausmaß, Wahrscheinlichkeit und Zeitpunkt der Änderungen eingeordnet. Somit stellt diese Liste die Schlüsselanforderungen der Software, aus der Evolutionsperspektive, dar. Nun geht es darum, zu verstehen, wie wichtig die Änderungen jeweils sind. Teilt man den Aufwand der jeweiligen Änderung durch die Zeitspanne, bis zu dem Zeitpunkt, an dem die Änderung erwartet wird, erhält man einen Wert, der die Dringlichkeit der Änderung angibt. Eine Änderung mit einem Aufwand von 20, die in 2 Monaten erwartet wird, bekommt also den Wert 10, wobei eine Änderung mit dem Aufwand von 10, die in 2 Monaten erwartet wird, lediglich 5 zugewiesen bekommt. Das heißt, dass die erste Änderung eine höhere Priorität zugewiesen bekommt, als die zweite und man sich somit zunächst um die erste Änderung kümmern sollte. Mit diesem Prinzip lassen sich alle Änderungen nach Priorität sortieren und man berücksichtigt das Problem, dass Anforderungen sich eventuell über die Zeit verändern. Änderungen, die erst in ferner Zukunft benötigt werden, bekommen eine niedrige Priorität zugewiesen, und man umgeht die Gefahr, dass man Arbeit in eine Änderung steckt, die vielleicht niemals eintritt. Am Ende dieses Schrittes erhält man eine Liste mit Schlüsselanforderungen aus der Evolutionsperspektive, die nach Dringlichkeit sortiert ist. Der Fokus in dem Projekt sollte auf den oberen Punkten der Liste liegen (\cite{SSA:12}, S. 550-551). \\
+
+\subsection{Aktuellen Stand der Evolution bestimmen}
+Im ersten Schritt wurde eine Liste mit Schlüsselanforderungen erstellt. Im zweiten geht es darum, für jeden Punkt dieser Liste ein Szenario zu erstellen, in dem beschrieben wird, inwiefern das System geändert werden muss, um die jeweilige Änderung umzusetzen.  Es geht darum, für jedes dieser Szenarien zu bestimmen, wie viel dabei vom System geändert werden muss und wie riskant diese Änderungen am System sind. Als Resultat erhält man Klarheit darüber, ob die Softwarearchitektur angepasst werden muss, um die neu bestimmten Anforderungen zu erfüllen. Es geht aber nicht darum jede Änderung exakt zu planen, sondern vielmehr darum, zu entscheiden, ob die jeweilige Änderung, unter Berücksichtigung der Kosten und des Zeitplans, überhaupt vertretbar ist. Auch hier reicht ein textbasiertes Vorgehen aus, um die Resultate dieses Schrittes zu notieren. \\
+Zusammengefasst wird in diesem Schritt zunächst die Softwarearchitektur analysiert, um darauf basierend zu entscheiden, wie gut die Änderungen mit der zugrundeliegenden Architektur umgesetzt werden können (\cite{SSA:12} S. 551).
+
+\subsection{Evolution Trade-offs abwägen}
+Im dritten Schritt geht es nun darum, zu untersuchen, welche Optionen für die Umsetzung der jeweiligen Änderungen bestehen. Hier werden nur die Punkte der Liste behandelt, die überhaupt eine Änderung der Architektur erfordern. Um die benötigte Flexibilität, für die jeweiligen Änderungen zu gewährleisten, hat man folgende Optionen:
+
+\begin{itemize}
+	\item Ein flexibles System entwickeln. Man kann von Anfang an den Aufwand betreiben, um ein anpassbares System zu entwickeln. Dieses System ist meist modular aufgebaut und kann mit kleinerem Aufwand geändert werden. Dies kostet allerdings schon in der Entwicklungsphase einen erheblichen Mehraufwand, der sich unter Umstünden niemals auszahlt.
+	\item Änderungen im Design vorsehen, aber nicht implementieren. Im Design können verschiedene Änderungen und Erweiterungen bereits vorgesehen sein, diese werden aber noch nicht implementiert, sondern auf den Zeitpunkt verschoben, an dem sie wirklich benötigt werden. 
+	\item Keine Rücksicht auf Änderungen. Während der initialen Entwicklung, berücksichtigt man spätere Änderungen nicht. Die große Gefahr hierbei ist, dass kleine Änderungen, zu einem späteren Zeitpunkt, einen großen Aufwand bedeuten, beziehungsweise ein großes Risiko mit sich bringen.
+\end{itemize}
+
+Für welche Option man sich entscheidet, hängt hauptsächlich von der Art des Systems, der Wahrscheinlichkeit für das Eintreten der Änderung und der Zuversicht darüber, Änderungen auch zu einem späteren Zeitpunkt ohne großes Risiko umsetzten zu können, ab. \\
+In diesem Schritt entscheidet man sich für eine Strategie, mit deren Hilfe man die Anforderungen der Evolution erfüllt und zu welchem Zeitpunkt man den Aufwand in das System steckt. Dies kann bereits in der Entwicklungsphase geschehen, oder erst zu dem Zeitpunkt, an dem die Änderung benötigt wird. Für jede Option muss der Einfluss auf die Architektur berücksichtigt werden. \\
+Auch hier reicht wieder eine einfache textuelle Beschreibung der jeweiligen Strategien und den damit verbundenen Risiken und Kosten (\cite{SSA:12}, S. 552).
+
+\subsection{Architekturtaktiken anwenden}
+Im finalen Schritt wird nun die beste Strategie für die jeweilige Änderung angewandt. Es ist darauf zu achten, dass auch alle Views, die die Architektur der Software beschreiben, angepasst werden. \\
+Da dieser Prozess iterativ ist, muss jetzt erneut der aktuelle Stand der Evolution analysiert werden und es muss entschieden werden, ob weitere Änderungen an der Architektur vonnöten sind (\cite{SSA:12}, S. 552). Abbildung \ref{fig:activities} zeigt auf den Ablauf dieses Prozesses als Aktivitätsdiagramm.
+
+ \begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/act.png}
+	\caption{Prozessablauf als Aktivitätsdiagramm (basierend auf \cite{SSA:12}, S. 549, Figure 28-1)}
+	\label{fig:activities}
+\end{figure}
+
+\section{Aim42}
+Je länger eine Software im Betrieb ist, desto riskanter, schwieriger und langwieriger werden Änderungen. Dies hat verschiedene Gründe, unter anderem Zeitdruck, schlechte Kommunikation und mangelnder Fokus auf langfristige Ziele im Team. Um dieses Problem zu umgehen, hat Gernot Starke, in Kooperation mit Kollegen ein Open Source Verfahren entwickelt und es \glqq Architecture Improvement Method\grqq, oder kurz aim42, genannt (\cite{improve} S. 32-33). In diesem Abschnitt wird das generelle Vorgehen erklärt, sowie verschiedene Praktiken und Methoden des Verfahrens beispielhaft erläutert. 
+
+\subsection{Überblick}
+Aim42 ist eine Sammlung bereits etablierter Taktiken und Techniken zur systematischen Evolution, Wartung, Migration und Verbesserung von Software. Das iterative Vorgehen teilt sich in drei Phasen Analyze, Evaluate und Improve auf, zusätzlich gibt es phasenübergreifende Aktivitäten. Der Zusammenhang wird in Abbildung \ref{fig:aim42} verdeutlicht. Durch den iterativen Ablauf von aim42 basiert das Vorgehen größtenteils auf dem Feedback zwischen den Phasen, dadurch ist es außerdem gut mit der agilen Softwareentwicklung kombinierbar (\cite{aim42}).
+
+
+\begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/aim42.png}
+	\caption{Die drei Phasen von aim42 (Abb. aus \cite{aim42})}
+	\label{fig:aim42}
+\end{figure}
+
+\subsection{Begriffe}
+Aim42 nutzt einheitliche Begriffe, die im folgenden Teilabschnitt erklärt werden.  Abbildung \ref{fig:aim422} zeigt darüber hinaus den Zusammenhang der verwendeten Begriffe.
+\paragraph{Issue}
+Jedes Problem, Fehler, Risiko oder suboptimale Situation, sowie deren Ursachen im System, beziehungsweise in Prozessen in Verbindung mit dem System. Dazu zählen unter anderem Management, Entwicklung, administrative, sowie organisatorische Aktivitäten.
+\paragraph{Cause}
+Ursache für einen oder mehrere Fehler.
+\paragraph{Improvement}
+Lösung, Abhilfe oder Behebung für einen oder mehrere Fehler.
+\paragraph{Cost (of issue)}
+Kosten eines Fehlers für eine bestimmte Auftrittsfrequenz oder Zeitperiode.
+\paragraph{Cost (of improvement)}
+Kosten einer Verbesserung, Behebung, Taktik oder Strategie.
+\paragraph{Risk}
+Potenzielles Problem. Verbesserungen (Improvements) können Risiken (Risks), die damit in Verbindung stehen, verbessern, verschlechtern oder gar neue Risiken (Risks) hervorrufen.\\
+(\cite{aim42})
+
+
+%TODO quelle
+\begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/aim422.png}
+	\caption{Die Terminologie von aim42 (Abb. aus \cite{aim42}) }
+	\label{fig:aim422}
+\end{figure}
+
+\subsection{Analyze}
+In dieser Phase geht es darum, das System zu verstehen und einen Überblick über den Einsatzzweck und die Qualitätsanforderungen zu bekommen. Dieser Schritt kann als initiale Bestandsaufnahme gesehen werden. Ziel ist es interne Strukturen, Konzepte und Architekturansätze zu erkennen, Fehler, Probleme und Workarounds zu finden und deren Ursachen, sowie eventuelle Abhängigkeiten zu verstehen. Dabei kann dieser Schritt als eine Art Breitensuche gesehen werden (\cite{improve} S. 34). Zu starke Konzentration auf einzelne Teilaspekte lenken eventuell von größeren Problemen ab. \\
+Aim42 bietet für diese Analysephase verschiedene Praktiken an. Eine Übersicht der wichtigsten Analysepraktiken ist in Abbildung \ref{fig:analyse} zu sehen. In dieser Ausarbeitung werden zwei dieser Praktiken näher beschrieben (\cite{aim42}).
+
+%TODO quelle
+\begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/analyse.png}
+	\caption{aim42 Analysepraktiken (Abb. aus \cite{aim42}) }
+	\label{fig:analyse}
+\end{figure}
+
+\paragraph
+{Context-Analysis}
+Die Context-Analysis soll dazu dienen Probleme zu finden, die auf eine externe Schnittstelle zurückzuführen sind. Dabei kann es zum Beispiel sein, dass die Schnittstelle kritische Qualitätsanforderungen beeinflusst, mit unpassenden Technologien implementiert ist oder schlecht dokumentiert, beziehungsweise schlecht verstanden ist.\\
+In der Context-Analysis wird zwischen zwei Arten von Context differenziert. Zum einen der Business Context, dazu zählen Organisationen, Anwendungen, Benutzer oder Schnittstellen, die mit diesem System interagieren. Und zum anderen der Technical Context, dieser beschreibt Hardware oder technische Infrastruktur, die Daten oder Events zu dem System liefert. Während der Business Context dazu genutzt werden kann die Geschäftsprozesse im Zusammenhang mit dem System zu beschreiben, dient der Technical Context dazu die Hardware Infrastruktur zu beschreiben.
+Als Notation für die ContextAnalysis dient ein Kontextdiagramm in Verbindung mit einer Tabelle, in der die einzelnen Elemente des Kontextdiagramms beschrieben werden.\\
+Abbildung \ref{fig:diag} zeigt ein solches Kontext Diagramm, das für das Open Source Projekt HtmlSanityCheck angefertigt wurde. In Verbindung mit der Anforderung, dass der ?check? innerhalb von 5 Sekunden fertig sein muss, ist in diesem Kontextdiagramm ersichtlich, dass die externe Schnittstelle zu anderen Webseiten zu einem Problem werden könnte (\cite{aim42}).
+
+
+\begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/diag.png}
+	\caption{Beispiel Diagramm HtmlSanityCheck(Abb. aus \cite{aim42}) }
+	\label{fig:diag}
+\end{figure}
+
+\paragraph{Capture Quality Requirements}
+Diese Praktik dient dazu die spezifischen Qualitätsanforderungen eines Systems explizit zu definieren. Als Vorgehen bietet sich hier an, alle maßgeblich beteiligten Steakholder des Projektes zu einem gemeinsamen Meeting einzuladen. Diese sollen dann während einem moderierten Workshop Qualitätsszenarien aufschreiben, um so die spezifischen Qualitätsanforderungen zu beschreiben. Ein Szenario beschreibt die Reaktion eines Systems auf ein bestimmtes Event. Ein Event kann zum Beispiel ein Benutzer sein, der einen Knopf anklickt, ein Administrator, der ein System neustartet oder ein Hacker, der unautorisiert Zugang zum System erlangt. Aber auch die Forderung nach einem neuen Feature, beziehungsweise ein Manager, der Operationskosten reduzieren möchte, können ein Event sein.\\
+In diesem Workshop wird oft auch nichttechnischen Steakholdern klar, dass nicht nur Business-Funktionalitäten benötigt werden, sondern auch technische Anforderungen bedient werden müssen, um Projektziele zu erreichen.\\
+Aus den vorherigen Erfahrungen hat sich ergeben, dass solche Workshops moderiert werden sollten. Außerdem enthalten diese Szenarien oft versteckte Problembeschreibungen, Risiken und Probleme mit dem aktuellen System, diese können in die Issue List aufgenommen werden, welche am Ende des Kapitels erläutert wird.\\
+Diese Methode bietet sich an, wenn die Steakholder offen für Diskussion oder einen Workshop sind. Sollten alle Qualitätsanforderungen bereits wohl definiert und auf dem aktuellen Stand sein, bietet sich diese Methode nicht an (Starke, aim42, 2020). Die Suche nach Problemen ergibt häufig schon sinnvolle Lösungsansätze, oft haben die beteiligten Steakholder konkrete Vorschläge für die Verbesserung von Systemen (\cite{improve}, S. 34).
+
+\subsection{Evaluate}
+Das Management von den Verbesserungen der internen Qualität der Software zu überzeugen, stellt häufig eine gewisse Schwierigkeit dar. Diese Änderungen sind von außen nicht ersichtlich und bringen unter Umständen keine direkt erkennbare Verbesserung. Deswegen ist es wichtig Probleme und Lösungen systematisch zu vergleichen und die damit verbundenen betriebswirtschaftlichen Werte zu schätzen, um so verschiedene Maßnahmen zu priorisieren (\cite{improve}, S. 34). \\\\
+
+Ziel dieser Phase ist es also die im vorherigen Schritt gefundenen Probleme, Fehler und Risiken, vergleichbar zu machen, beziehungsweise deren Wert zu messen. Normalerweise beinhaltet diese Phase das Schätzen von Werten, nur in wenigen Fällen können Werte konkret gemessen werden. Auch für diese Phase bietet aim42 verschiedene Praktiken und Methoden an (\cite{aim42}). 
+
+\paragraph{Estimate In Interval}
+Den genauen Wert, beziehungsweise die genauen Kosten für Probleme, Fehler und Risiken zu schätzen ist oft schwierig und ungenau. Deswegen bietet sich das Schätzen in Intervallen an. 
+Hierbei wird eine untere und eine obere Schranke für die jeweiligen Punkte geschätzt. Gute Schätzungen zeichnen sich dadurch aus, dass sie zu einer hohen Wahrscheinlichkeit innerhalb dieses Intervalls liegen (\cite{aim42}). Abbildung \ref{fig:cost} zeigt die Problemkosten, sowie die Kosten für die Maßnahmen, welche in Intervallen geschätzt wurden (\cite{improve}, S. 34).
+
+
+\begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=0.9\textwidth]{images/cost.png}
+	\caption{Estimate In Interval (Abb. aus \cite{improve}, S. 34, Bild 4) }
+	\label{fig:cost}
+\end{figure}
+
+\subsection{Improve}
+In der letzten Phase von aim42 geht es nun darum die konkreten Verbesserungen auszuführen und zu koordinieren, um so die Probleme zu beseitigen, die in der ersten Phase gefunden wurden. Aim42 verfolgt für diese Phase ein bestimmtes Konzept und liefert Fundamentals, Approches und Practices (siehe Abbildung \ref{fig:conc}), welche genutzt werden, um die Probleme zu beseitigen, beziehungsweise Verbesserungen umzusetzen. In der Softwareentwicklung werden oft mehrere strategische Planungen (Approches) in Verbindung mit verschiedenen taktischen Praktiken (Practices) über die Zeit genutzt (\cite{aim42}).
+
+\begin{figure}[htbp] 
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/conc.png}
+	\caption{Improve Konzept (Abb. aus \cite{aim42}) }
+	\label{fig:conc}
+\end{figure}
+
+\paragraph{Fundamentals}
+\textit{Fundamentals} sind Prinzipien, die in jedem Schritt dieser Phase berücksichtigt werden sollten.\\
+Dazu zählen:
+\begin{itemize}
+	\item \textbf{Fast Feedback } - Das Feedback sollte so schnell wie möglich eingeholt werden, sodass eventuelle Anpassungen schnell umgesetzt werden können.
+	\item \textbf{Improve Iteratively } - Alle Verbesserungen sollten inkrementell ablaufen, sodass Änderungen das System nicht negativ beeinflussen. Iterationen sind die Voraussetzung für das Vorgehen von aim42.
+	\item \textbf{Prototype Improvement} - Die Durchführbarkeit und Effektivität von Verbesserungen kann mit kleineren Prototypen, mit absehbarem Risiko getestet werden.
+	\item \textbf{Verify After Every Change} - Nach jeder Änderung muss sichergestellt werden, dass das System einwandfrei funktioniert.
+	\item \textbf{Reduce Complexity} - Einfache Lösungen sind einfacher zu verstehen und zu warten, deswegen sollte es immer das Ziel sein, die Komplexität möglichst gering zu halten
+	\item \textbf{Explicit Assumption} - Fehlende Fakten sollten durch explizite Annahmen kompensiert werden.
+	\item \textbf{Group Improvement Actions} - Ähnliche Aktivitäten sollten gruppiert werden, sodass eventuelle Synergien genutzt werden können.
+	
+\end{itemize} \cite{aim42}
+
+\paragraph{Approaches}
+Strategische Planung (Improvement Approches), sind Entscheidungen darüber, wie man Verbesserung generell auf lange Sicht angeht. Diese sind in die folgenden vier Kategorien aufgeteilt:
+
+\begin{itemize}
+	\item \textbf{Data Migration} - Diese Kategorie beinhaltet Ansätze zur Datenmigration. Als generelle Vorgabe gilt, behalte die (wichtigen) Daten und verwerfe, beziehungsweise ändere den Code.
+	\item \textbf{Rewrite} - Falls Fehler am bestehenden System nicht behoben werden können und das System komplett neu entwickelt werden muss, liefert diese Kategorie Ansätze, wie man dabei vorgehen könnte.
+	\item \textbf{Restructure} - In dieser Kategorie geht es darum, das System zu verbessern, indem man den bestehenden Code neu strukturiert. Dabei müssen eventuell bestimmte Funktionen extrahiert, die Modularisierung verbessert oder fehlerhafte Stellen entfernt werden.
+	\item \textbf{Improve Modularization} - Bei dieser Unterkategorie von \textit{Restructure}, geht es darum Abhängigkeiten, Schnittstellen und ähnliches zu verbessern
+	\item \textbf{Brainsize} - Kleinere Lösungen nutzen, und größere bei Bedarf aufteilen. Dies verbessert die Wartbarkeit und die Umsetzbarkeit. Hierzu zählen auch Microservices.
+	\item \textbf{Improve Domain Focus} - Dies ist eine weitere Unterkategorie von \textit{Restructure} und beschreibt das Vorgehen zur Trennung von \glqq Domänenbezogenem\grqq Code und rein technischen Aspekten.
+\end{itemize} \cite{aim42}
+
+\paragraph{Practices}
+Taktische Praktiken (Practices) im Gegensatz zu den Ansätzen (Approches) beschreiben die short-term Taktiken zur Verbesserung von Systemen. Auch die Praktiken sind in verschiedene Kategorien eingeteilt:
+\begin{itemize}
+	\item \textbf{Improve Processes and Organization} - Bei den Praktiken dieser Kategorie, werden Probleme verbessert, die durch ineffiziente Entwicklungs -, Rollout-, und Operation-Prozesse entstehen.
+	\item \textbf{Improve Architecture and Code Structure} - Es werden alle Bereiche des Quellcodes verbessert. Dies beinhaltet Abhängigkeiten, Namensgebung, Style und Struktur von Code.
+	\item \textbf{Improve Technical Infrastructure }- Die technische Infrastruktur beinhaltet sowohl die Verbesserung der zugrunde liegenden Software, als auch die der Hardware.
+	\item \textbf{Improve Analyzability and Evaluatability}- Diese Praktiken behandeln das Erstellen, Sammeln oder Verwalten von verschiedenen Metriken oder Kennzahlen.
+\end{itemize}\cite{aim42}
+
+\subsection{Cross-Cutting}
+Während des gesamten Prozesses sollten eine Problem-Liste (Issue-List), sowie die zugehörigen Maßnahmen (Improvement Backlog) geführt werden. Außerdem stellt aim42 weitere phasenübergreifende Praktiken zur Verfügung.
+\paragraph{Issue-List}
+Die Issue-List ist eine Sammlung von Problemen, die in der Analysephase herausgearbeitet wurden. Jedes Problem auf der Liste, sollte zu einer, oder mehreren Maßnahmen gelinkt sein.
+Die Probleme auf der Liste sollte man vergleichbar machen, indem man ihnen ein Wert zuweist. Sie wird Phasenübergreifend geführt und bei Bedarf aktualisiert.
+\paragraph{Improvement-Backlog}
+Auch das Improvement-Backlog wird während des gesamten Prozesses öffentlich geführt und regelmäßig kontrolliert. Wie auch in der Issue-List, ist jede Maßnahme auf dem Improvement-Backlog, zu einem Problem auf der Issue-List geklinkt (siehe Abbildung \ref{fig:cost}).
+\\\\ \cite{aim42}
+
+
