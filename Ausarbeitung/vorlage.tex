@@ -26,6 +26,7 @@
 \usepackage[pdftex]{graphicx}
 \usepackage{epstopdf}
 \usepackage[pdftex,plainpages=false]{hyperref}
+\usepackage{pdfpages}
 %\else
 %\usepackage{graphicx}
 %\usepackage[plainpages=false]{hyperref}
@@ -118,7 +119,11 @@
 %--------------------------------------------------------------------------
 \begin{appendix}						% Anh�nge sind i.d.R. optional
 %   \include{chapters/Glossar}			% Glossar   
-\include{chapters/Selbststaendigkeitserklaerung}
+
+\includepdf[pages=1]{chapters/ErklaerungTobias}
+\includepdf[pages=1]{chapters/ErklaerungErik}
+\includepdf[pages=1]{chapters/ErklaerungAnnika}
+
 \end{appendix}
 
 \end{document}
