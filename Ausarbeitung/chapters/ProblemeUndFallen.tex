@@ -3,34 +3,31 @@
 %%________________________________________________________________
 \section{Statische ADL's}
 Um Softwarearchitekturen zu beschreiben wurden viele Architecture Description Languages (ADLs) entwickelt.
-In diesen ADLs lässt sich gut die Geschäftslogik abbilden. Viele dieser ADLs ermöglichen es, ein Modell der Komponentenstruktur und des Verhaltens zu erstellen, welche häufig als Grundlage für die Integrationstests dienen.\\
-\cite{SAE}
+In diesen ADLs lässt sich gut die Geschäftslogik abbilden. Viele dieser ADLs ermöglichen es, ein Modell der Komponentenstruktur und des Verhaltens zu erstellen, welche häufig als Grundlage für die Integrationstests dienen (\cite{SAE}).
 \paragraph{Problem}
-Viele dieser ADLs bieten keine Repräsentation für die Evolution. \cite{SAE}
+Viele dieser ADLs bieten keine Repräsentation für die Evolution (\cite{SAE}).
 \paragraph{Risiko/Folgen}
-Durch die statische Natur der Modelle aus diesen ADLs ist es oft  aufwändig die  Softwarearchitekturmodelle bei Änderungen zu pflegen. Dadurch kann es dazu kommen, dass die Software geändert wird, das ursprünglich Architekturmodell jedoch nicht. Dies verstößt gegen den Concern Erhaltung von Wissen.\ref{Wissen}
-Ein anderes Problem dadurch kann sein, dass das Architekturmodell manuell aktualisiert wird, wodurch jedoch Inkonistenzen eingebaut werden. \cite{SAE}
+Durch die statische Natur der Modelle aus diesen ADLs ist es oft  aufwändig die  Softwarearchitekturmodelle bei Änderungen zu pflegen. Dadurch kann es dazu kommen, dass die Software geändert wird, das ursprünglich Architekturmodell jedoch nicht. Dies verstößt gegen den Concern Erhaltung von Wissen (\ref{Wissen}).
+Ein anderes Problem dadurch kann sein, dass das Architekturmodell manuell aktualisiert wird, wodurch jedoch Inkonistenzen eingebaut werden (\cite{SAE}).
 \paragraph{Risikoreduzierung}
 Eine Möglichkeit dies zu umgehen, ist die Verwendung von ADLs, welche auch Änderungsmöglichkeiten beinhalten. Dafür gibt es mehrere Ansätze:
 \subparagraph{Explizit Dynamische ADLs}:\\
 In diesen ADLs werden zusätzlich zum Softwarearchitekturmodell noch die dynamischen Aspekte spezifiziert. Jedoch ist es sehr anspruchsvoll alle möglichen Änderungen explizit zu formulieren.
-In diese Kategorie fallen z.B. Wright oder AADL.\\
-(\cite{SAE} S.10)
+In diese Kategorie fallen z.B. Wright oder AADL (\cite{SAE}, S. 10).
 \subparagraph{ Dynamische ADLs mit Rahmen}:\\
 In diesem Ansatz wird ein Rahmen für die möglichen Änderungen definiert.
-Die Probleme hierbei sind, dass diese Modelle häufig nicht in Verbindung mit den komponentenbasierten Plattformen stehen, sondern eher als eine Art Repository zur Evaluation von expliziten Änderungen zu sehen sind. Das andere Problem besteht darin, dass die Anzahl der erlaubten Architekturen in vielen Fällen unendlich ist und die Modellchecker die Evaluation von unendlich großen Architekturfamilien nicht unterstützen. Beispiele für diese Kategorie wären UML2.0, SafArchie, ACL und ArchStudio.\\(\cite{SAE}, S.12)
+Die Probleme hierbei sind, dass diese Modelle häufig nicht in Verbindung mit den komponentenbasierten Plattformen stehen, sondern eher als eine Art Repository zur Evaluation von expliziten Änderungen zu sehen sind. Das andere Problem besteht darin, dass die Anzahl der erlaubten Architekturen in vielen Fällen unendlich ist und die Modellchecker die Evaluation von unendlich großen Architekturfamilien nicht unterstützen. Beispiele für diese Kategorie wären UML2.0, SafArchie, ACL und ArchStudio (\cite{SAE}, S. 12).
 \paragraph{Aspektorientierte ADLs}
 Hier werden die  Aspect-Oriented Software Development (AOSD) Prinzipien direkt auf Architekturebene innerhalb der ADLs angewandt.
 Dies ist durchaus sinnvoll, da die Aspektorientierte Programmierung eine Möglichkeit ist, mit Cross-Cutting-Concerns umzugehen, und in der Softwarearchitektur die Perspektiven auch Cross-Cutting-Concerns  beinhalten.
-Als ADLs dieser Kategorie seien Fractal Aspect Component (FAC) und TranSAT zu nennen.\\(\cite{SAE}, S.12ff)\\
+Als ADLs dieser Kategorie seien Fractal Aspect Component (FAC) und TranSAT zu nennen (\cite{SAE}, S. 12ff).\\
 Im Folgenden wird erklärt, wie es mit TranSAT möglich ist, die Architektur um neue Concerns zu erweitern. 
 
 
 \subsection{TranSAT}
 \paragraph{Exkurs Aspekt Orientierte Programmierung}
 Aspektorientierte Programmierung (AOP) ist ein Programmierparadigma, welches durch Überlegungen aus dem Prinzip Separation Of Concerns (siehe Abschnitt \ref{seperation}) hervorgegangen ist. Mit klassischen objektorientierten Ansätzen lassen sich die Geschäftslogik gut in einzelne gut trennbare Module aufteilen. Jedoch gibt es neben der Geschäftslogik noch weitere Concerns, meist technische wie Logging oder Security, für welche dann der Code verteilt über die einzelnen (geschäfts-)logischen Modulen vorhanden ist. Diese Cross-Cutting-Concerns, hier Aspekte genannt, werden dementsprechend auch in eigene Module ausgelagert. Dazu werden sogenannte pointcuts spezifiziert, in welchen Aspekte angewendet werden sollen. Als Beispiel etwa: Logge alle Funktionsaufrufe, deren Name mit set beginnt. Dabei wird der Code der Geschäftslogik nicht verändert, sonder über eine Weaving-Funktion miteinander vernetzt, also an die in den Pointcuts definierten Stellen eingebunden. In \ref{fig:aop} ist zu sehen, wie sich die Modularität aufgrund des Ansatzes verbessert.
-Eines der ersten und wohl bekanntesten Frameworks ist AspectJ, welches Java um das AOP Paradigma erweitert.\\
-\cite{AOP}
+Eines der ersten und wohl bekanntesten Frameworks ist AspectJ, welches Java um das AOP Paradigma erweitert (\cite{AOP}).
 
  \begin{figure}
 	\centering
@@ -42,25 +39,21 @@ Eines der ersten und wohl bekanntesten Frameworks ist AspectJ, welches Java um d
 \newpage
 \paragraph{TranSAT Struktur}
 TranSAT (Transform Software Architecture Technologies) ist ein Framework, welches es ermöglicht, bestehende Softwarearchitekturmodelle um neue Concerns zu erweitern. Dabei lässt TranSAT nur konsistente Veränderungen zu.\\
-Dafür besitzt TranSAT  ein Basissoftwarearchitekturmodell bzw. auch Softwarearchitekturspezifikation genannt, welches die bisherige Architektur beschreibt. Dieses kann dann mit den Prinzipien der Aspekt Orientierte Programmierung durch neue Concerns erweitert werden. Typische Concerns sind Persistenz, Security oder Transaktionsmanagement.\\
-\cite{SAE},\cite{TranSAT}\\
+Dafür besitzt TranSAT  ein Basissoftwarearchitekturmodell bzw. auch Softwarearchitekturspezifikation genannt, welches die bisherige Architektur beschreibt. Dieses kann dann mit den Prinzipien der Aspekt Orientierte Programmierung durch neue Concerns erweitert werden. Typische Concerns sind Persistenz, Security oder Transaktionsmanagement (\cite{SAE}, \cite{TranSAT}).
 \subparagraph{Concerns:}
 Dafür müssen die Concerns unabhängig von dem bestehenden Basissoftwarearchitekturmodell bzw. des Kontextes spezifiziert werden. Dies ermöglicht zudem noch eine leichtere Wiederverwendung der Concerns.\\
 Häufig sind diese neuen Concerns Cross-Cutting-Concerns, d.h. sie verändern mehrere Geschäftslogikkomponenten, sowie das Interaktionsverhalten zwischen verschiedene Komponenten.\\
 Dafür müssen dann die Integrationsregeln spezifiziert werden.\\
-Damit TranSAT aus dem Basissoftwarearchitekturmodel und dem Concern ein neues Softwarearchitekturmodell erstellen kann, werden wie in \ref{fig:TranSAT} zu sehen die Konzepte des Adapters und des Weavers verwendet.\\
-\cite{TranSAT}\\
+Damit TranSAT aus dem Basissoftwarearchitekturmodel und dem Concern ein neues Softwarearchitekturmodell erstellen kann, werden wie in \ref{fig:TranSAT} zu sehen die Konzepte des Adapters und des Weavers verwendet (\cite{TranSAT}).
 \subparagraph{Adapter:}
-Im Adapter sind wie in \ref{fig:TranSAT2} zu sehen, die Integrationsregeln spezifiziert. Der Adapter kennt den Kontext nicht, besitzt jedoch wie in \ref{fig:TranSAT2} zu sehen eine Point-Cut-Mask. Die Point-Cut-Mask ist eine Art Vertrag, welcher definiert, wie die Umgebung auszusehen hat, damit der Concern richtig in die Architektur integriert werden kann.\\
-\cite{TranSAT}\\
+Im Adapter sind wie in \ref{fig:TranSAT2} zu sehen, die Integrationsregeln spezifiziert. Der Adapter kennt den Kontext nicht, besitzt jedoch wie in \ref{fig:TranSAT2} zu sehen eine Point-Cut-Mask. Die Point-Cut-Mask ist eine Art Vertrag, welcher definiert, wie die Umgebung auszusehen hat, damit der Concern richtig in die Architektur integriert werden kann (\cite{TranSAT}).
 \subparagraph{Weaver:}
-Der Weaver vergleicht die Informationen aus dem Adapter mit denen des bestehenden Basisarchitekturmodells. Dabei vergleicht er die Point-Cut-Mask des Concerns mit der Point-Cut-Definition im Basisarchitekturmodel und prüft ob die Integrationsregeln angewandt werden können. Dann fügt er den neuen Concern gemäßt der Integrationsregeln an den Stellen, an denen die Point-Cut-Mask und  die Point-Cut-Definition übereinstimmen, in das Basisarchitekturmodell ein und erzeugt so ein neues Architekturmodell\ref{fig:TranSAT}.\\
-\cite{TranSAT}\\
+Der Weaver vergleicht die Informationen aus dem Adapter mit denen des bestehenden Basisarchitekturmodells. Dabei vergleicht er die Point-Cut-Mask des Concerns mit der Point-Cut-Definition im Basisarchitekturmodel und prüft ob die Integrationsregeln angewandt werden können. Dann fügt er den neuen Concern gemäßt der Integrationsregeln an den Stellen, an denen die Point-Cut-Mask und  die Point-Cut-Definition übereinstimmen, in das Basisarchitekturmodell ein und erzeugt so ein neues Architekturmodell\ref{fig:TranSAT} (\cite{TranSAT}).
 
  \begin{figure}
 	\centering
 	\includegraphics[width=1\textwidth]{images/TranSAT.png}
-	\caption{TranSat Übersicht (Abbildung aus \cite{TranSAT}, S.4)}
+	\caption{TranSat Übersicht (Abbildung aus \cite{TranSAT}, S. 4)}
 	\label{fig:TranSAT}
 \end{figure}
 
@@ -68,7 +61,7 @@ Der Weaver vergleicht die Informationen aus dem Adapter mit denen des bestehende
  \begin{figure}
 	\centering
 	\includegraphics[width=1\textwidth]{images/TranSAT2.png}
-	\caption{TranSat meta-model (Abbildung aus \cite{TranSAT}, S.5)}
+	\caption{TranSat meta-model (Abbildung aus \cite{TranSAT}, S. 5)}
 	\label{fig:TranSAT2}
 \end{figure}
 %\paragraph{TranSat Demo: Bankanwendung}
@@ -78,32 +71,32 @@ Der Weaver vergleicht die Informationen aus dem Adapter mit denen des bestehende
 \newpage
 %%________________________________________________________________
 \section{Undokumentierte Architekturen}
-In vielen Softwareprojekten gibt es keine Architekturdokumentationen. Auffällig ist, das viele Open-Source-Projekte die Architektur nicht dokumentieren.(\cite{Role}S.246)\\
+In vielen Softwareprojekten gibt es keine Architekturdokumentationen. Auffällig ist, das viele Open-Source-Projekte die Architektur nicht dokumentieren (\cite{Role}, S. 246).\\
 Dies verstößt gegen den Concern Erhaltung von Wissen \ref{Wissen}.
 
 \paragraph{Ursachen}
-Mögliche Ursachen könnten sein, dass sich keine Gedanken über die Architektur gemacht wurden und \glqq einfach drauf los programmiert wird \grqq oder dass, wenn sich Gedanken gemacht wurden, diese nicht dokumentiert werden, da die geplante Architektur im Team als \glqq selbsverständlich\grqq gilt. 
+Mögliche Ursachen könnten sein, dass sich keine Gedanken über die Architektur gemacht wurden und \glqq einfach drauf los programmiert wird \grqq oder dass, wenn sich Gedanken gemacht wurden, diese nicht dokumentiert werden, da die geplante Architektur im Team als \glqq selbstverständlich\grqq gilt (Quelle: Eigene Erfahrung).
   
 \paragraph{Folgen}
 Im Laufe der Zeit geht das Wissen über die Architektur verloren, falls es überhaupt vorhanden war. Daraus resultiert dann, dass das Projekt im Laufe der Zeit komplexer wird, ohne dass eine Übersicht über die Architektur existiert und die Software somit schlecht zu warten oder erweitern ist.
 
 \paragraph{Folgenreduktion}
-Im Laufe der Zeit wurden verschiedene Techniken zum Reverseengineering der Architektur erarbeitet.\cite{Role}
-Beispiele dafür wären: Package View, Bunch View \cite{otam}, ArchDRH View \cite{ldrt}oder ACDC View \cite{acdc}.\\
+Im Laufe der Zeit wurden verschiedene Techniken zum Reverseengineering der Architektur erarbeitet (\cite{Role}).
+Beispiele dafür wären: Package View, Bunch View (\cite{otam}), ArchDRH View (\cite{ldrt}) oder ACDC View (\cite{acdc}).\\
 Sobald dies gemacht wurde, kann das herausgekommene Architekturmodell dann analysiert, evaluiert und verbessert werden.
 
 %%________________________________________________________________
 \section{Nicht Gewartete Architekturen/Architekturmodell Anders Als Implementierung}
-Viele Projekte besitzen zwar eine Architekturdokumentation, diese ist jedoch häufig nicht vertrauenswürdig.(\cite{Role}, S.249)
+Viele Projekte besitzen zwar eine Architekturdokumentation, diese ist jedoch häufig nicht vertrauenswürdig (\cite{Role}, S. 249).
 \paragraph{Ursachen}
-Viele Ansätze für ADLs entkoppeln den implementierten Code von der Architekturbeschreibung.\\(\cite{Role}, S.4)
+Viele Ansätze für ADLs entkoppeln den implementierten Code von der Architekturbeschreibung (\cite{Role}, S. 4).
 
 \paragraph{Folgen}
 Es kann dazu kommen, dass die Architekturbeschreibung nicht mit dem eigentlichen Code übereinstimmt und somit inkonsistent ist. Der Code kann dadurch geplante Architektureigenschaften verletzen. Und es wird unübersichtlich, wenn Code und Architekturbeschreibung nicht übereinstimmen.
 Auch hier liegt ein Verstoß gegen den Concern Erhaltung von Wissen (siehe Abschnitt \ref{Wissen}) vor.
 
 \paragraph{Risikoreduktion}
-Es ist hilfreich ADLs zu verwenden, welche eng mit dem Code gekoppelt sind. Beispiele dafür wären ArchJava, Fractal oder Sofa.(\cite{Role}, S.4)
+Es ist hilfreich ADLs zu verwenden, welche eng mit dem Code gekoppelt sind. Beispiele dafür wären ArchJava, Fractal oder Sofa (\cite{Role}, S. 4).
 Einige bieten die Möglichkeit der Codegenerierung und des Überprüfens, ob der vorhandene Code gegen das Modell verstößt.
 
 \paragraph{Folgenreduktion}
@@ -121,7 +114,7 @@ Die Software wird zu komplex und zu teuer. Außerdem ist es möglich, dass, wenn  
 
 \paragraph{Risikoreduktion}
 Es sollte nur nach ausreichender Analyse entsprechende Unterstützung für die Änderungen eingebaut werden, um diese richtig zu priorisieren.\\
-(\cite{SSA:12}, S.560)
+(\cite{SSA:12}, S. 560)
 
 
 %%________________________________________________________________
@@ -146,8 +139,7 @@ Daher steht die Fokussierung auf Flexibilität häufig im direkten Widerspruch zu 
 Zusätzlich kommt es vor, dass durch die zu starke Fokussierung auf die Flexibilität durch Zeitdruck andere Qualitätseigenschaften vernachlässigt werden.
 
 \paragraph{Risikoreduktion}
-Es muss für ein Projekt eine passende Balance zwischen den verschiedenen Qualitätseigenschaften gefunden werden. Dafür ist ein Prozess der kontinuierlichen Beurteilung der Architektur hilfreich.\\
-(\cite{SSA:12}, S.561-562)
+Es muss für ein Projekt eine passende Balance zwischen den verschiedenen Qualitätseigenschaften gefunden werden. Dafür ist ein Prozess der kontinuierlichen Beurteilung der Architektur hilfreich (\cite{SSA:12}, S. 561-562).
 
 %%________________________________________________________________
 \section{Zu Starke Abhängigkeit von spezifischer Hard- oder Software}
@@ -160,13 +152,12 @@ Zudem sind dadurch kürzere Entwicklungszeiten möglich.
 Es kann sein, dass die verwendeten Komponenten nicht mehr verfügbar sind. Bei Hardware könnte es sein, dass diese kaputt geht und evtl. nicht mehr hergestellt werden und bei Software z.B. dass Verträge auslaufen.\\
 Es kann auch sein, dass irgendwann bestimmte Komponenten theoretisch  durch bessere oder preiswertere Komponenten ausgetauscht werden könnten, jedoch die eigene Software speziell auf die eine Komponente angepasst ist und somit diese Komponente faktisch nicht austauschbar ist.
 \paragraph{Risikoreduktion}
-\subparagraph{1.}
-Vor der Verwendung von spezifischer Hard- oder Software sollte vorher abgewogen werden, ob die Vorteile überwiegen.
-\subparagraph{2.}
-Sollte entschieden worden sein, dass die Vorteile überwiegen, gilt es die Roadmaps der Verkäufer, so wie die anderen Faktoren die das Leben der Komponenten beeinflussen, zu berücksichtigen. Also z.B. lieber zusätzliche Hardware zu kaufen, die als Ausfallersatz dient, sollte verwendete Hardware kaputt gehen.
-\subparagraph{3.}
-Die Auswirkungen durch Änderungen der spezifischen Komponenten sollte durch eine entsprechende Abstraktion der  Schnittstellen zu diesen erfolgen.
-(\cite{SSA:12}, S.562)
+
+\begin{enumerate}
+	\item Vor der Verwendung von spezifischer Hard- oder Software sollte vorher abgewogen werden, ob die Vorteile überwiegen.
+	\item Sollte entschieden worden sein, dass die Vorteile überwiegen, gilt es die Roadmaps der Verkäufer, so wie die anderen Faktoren die das Leben der Komponenten beeinflussen, zu berücksichtigen. Also z.B. lieber zusätzliche Hardware zu kaufen, die als Ausfallersatz dient, sollte verwendete Hardware kaputt gehen.
+	\item Die Auswirkungen durch Änderungen der spezifischen Komponenten sollte durch eine entsprechende Abstraktion der  Schnittstellen zu diesen erfolgen.
+\end{enumerate} (\cite{SSA:12}, S. 562)
 %%________________________________________________________________
 \section{Verlorengegangene Entwicklungsumgebung}
 
@@ -190,7 +181,7 @@ Zunächst sollte der Name, die Version, der Ursprung und der Grund für die Einfüh
 Um zu vermeiden, dass die so gesammelten Informationen unvollständig sind, sollte am Ende der Konstruktionsphase die Entwicklungsumgebung woanders nur mit den gesammelten Informationen erneut aufgesetzt und getestet werden. Dabei fällt auf, ob noch etwas vergessen wurde. Sollte dabei auffallen, dass etwas vergessen wurde, sollte dies mit aufgenommen werden und dann erneut aufgesetzt und getestet werden, so wird erspart, dass die Lücken erst auffallen, wenn das Wissen darüber bereits vergessen wurde.\\
 Wenn möglich ist es sinnvoll, Hardware-Virtualisierungstechniken zu verwenden, um die Umgebung zu erhalten.\\
 Sollten kritische oder nur schwer zu beschaffende Hardwarekomponenten verwendet werden, ist es außerdem noch sinnvoll davon Ersatzteile zu besitzen.\\
-(\cite{SSA:12}, S.562-563)
+(\cite{SSA:12}, S. 562-563)
 
 %%________________________________________________________________
 \section{Ad	Hoc Release Management}
@@ -201,4 +192,4 @@ Daher wird ein Releasemanagement benötigt.
 \paragraph{Risikoreduktion}
 \label{release}
 Der Release-Prozess sollte soweit wie möglich automatisiert werden. Dies erhöht die Zuverlässigkeit und Wiederholbarkeit. Sobald der Release-Prozess einmal automatisiert wurde, sinkt der Aufwand bei weiteren Releases. Zusätzlich verringert dies die menschlichen Fehler, die während des Release-Prozess auftreten.
-
+(\cite{SSA:12}, S. 562-563)
